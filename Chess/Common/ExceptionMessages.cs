@@ -9,5 +9,8 @@
 
         public const string PlayerAlreadyOwnsFigureException = "This player already owns this figure!";
         public const string PlayerDoesNotOwnFigureException = "This player does not own this figure!";
+
+        public const string StandardGameMustHaveTwoPlayersException = "Standard Start Game Initialization Strategy needs exactly two players!";
+        public const string StandardGameMustHaveEightSquareBoardException = "Standard Start Game Initialization Strategy needs 8x8 board!";
     }
 }
