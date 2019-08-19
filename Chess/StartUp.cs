@@ -1,6 +1,6 @@
 ﻿namespace Chess
 {
-    using System;
+    using Chess.Common.Console;
     using Chess.Renderers;
     using Chess.Renderers.Contracts;
 
@@ -8,8 +8,7 @@
     {
         public static void Main(string[] args)
         {
-            Console.SetWindowSize(80, 80);
-            Console.SetBufferSize(80, 80);
+            ConsoleHelpers.SetConsoleWidthAndHeigth();
 
             IRenderer renderer = new ConsoleRenderer();
             renderer.RenderMainMenu();
