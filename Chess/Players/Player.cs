@@ -9,8 +9,10 @@
     public class Player : IPlayer
     {
         private readonly ICollection<IFigure> figures;
+
         public Player(string name, ChessColor color)
         {
+            //TODO: Validate name length
             this.Name = name;
             this.Color = color;
 

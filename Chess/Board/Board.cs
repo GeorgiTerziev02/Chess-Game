@@ -46,6 +46,14 @@
             this.board[arrayRow, arrayCol] = null;
         }
 
+        public IFigure GetFigureAtPosition(Position position)
+        {
+            int arrayRow = GetArrayRow(position.Row);
+            int arrayCol = GetArrayCol(position.Col);
+
+            return this.board[arrayRow, arrayCol];
+        }
+
         private int GetArrayRow(int chessRow)
         {
             return this.TotalRows - chessRow;
@@ -58,15 +66,7 @@
 
         private void CheckIfPositionIsValid(Position position)
         {
-            if (position.Row < GlobalConstants.MinimumRowValueOnBoard || position.Row > GlobalConstants.MaximumRowValueOnBoard)
-            {
-                throw new IndexOutOfRangeException(ExceptionMessages.RowPositionOutOfBoardException);
-            }
-
-            if (position.Col < GlobalConstants.MinimumColumnValueOnBoard || position.Col > GlobalConstants.MaximumColumnValueOnBoard)
-            {
-                throw new IndexOutOfRangeException(ExceptionMessages.ColPositionOutOfBoardException);
-            }
+            Position.CheckIfValid(position);
         }
     }
 }

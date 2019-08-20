@@ -12,5 +12,8 @@
 
         public const string StandardGameMustHaveTwoPlayersException = "Standard Start Game Initialization Strategy needs exactly two players!";
         public const string StandardGameMustHaveEightSquareBoardException = "Standard Start Game Initialization Strategy needs 8x8 board!";
+
+        public const string NonExistingChessColor = "Invalid Chess Color";
+        public const string InvalidCommandException = "Invalid Command";
     }
 }
