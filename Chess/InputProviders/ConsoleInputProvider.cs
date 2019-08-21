@@ -35,6 +35,7 @@
 
         public Move GetNextPlayerMove(IPlayer player)
         {
+            ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
             Console.SetCursorPosition(Console.WindowWidth / 2 - PlayerNameText.Length / 2 + 3, ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
             Console.BackgroundColor = ConsoleColor.Black;
 

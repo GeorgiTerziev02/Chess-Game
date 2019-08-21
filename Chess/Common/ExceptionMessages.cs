@@ -15,5 +15,11 @@
 
         public const string NonExistingChessColor = "Invalid Chess Color";
         public const string InvalidCommandException = "Invalid Command";
+
+        public const string EmptyPositionException = "Position {0}{1} is empty!";
+        public const string SelectingOpponentsFigureException = "Figure at Position {0}{1} is not yours!";
+        public const string MovingFigureToAPositionWithYourFigureException = "You already have figure at Position {0}{1}!";
+
+        public const string InvalidPawnMovementBackwardsException = "Pawns cannot move backwards!";
     }
 }

@@ -177,6 +177,7 @@
 
         public static void ClearRow(int row)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(0, row);
             Console.Write(new string(' ', Console.WindowWidth));
         }

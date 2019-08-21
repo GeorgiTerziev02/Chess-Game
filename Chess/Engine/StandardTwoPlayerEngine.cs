@@ -10,6 +10,7 @@
     using Chess.Board.Contracts;
     using System;
     using System.Linq;
+    using Chess.Figures.Contracts;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -52,6 +53,27 @@
                 {
                     var player = this.GetNextPlayer();
                     var move = this.input.GetNextPlayerMove(player);
+
+                    var from = move.From;
+                    var to = move.To;
+                    var figure = this.board.GetFigureAtPosition(from);
+                    this.CheckIfPlayerOwnsFigure(player, figure, from);
+                    this.CheckIfToPositionEmpty(figure, to);
+
+                    var availableMovements = figure.Move();
+
+                    foreach (var movement in availableMovements)
+                    {
+                        movement.ValidateMove(figure, board, move);
+                    }
+
+                    //TODO: Every move check if we are in check
+                    //TODO: Check castle - check if castle is valid
+                    //TODO: If not castle - Move figure (check pawn for an-pasan)
+                    //TODO: check check
+                    //TODO: if(in check) check checkmate
+                    //TODO: if not in check - check draw
+                    //Continue
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +82,7 @@
                 }
 
             }
-       
+
         }
 
         public void WinningConditions()
@@ -85,10 +107,34 @@
             {
                 if (this.players[i].Color == ChessColor.White)
                 {
-                    this.currentPlayerIndex = i;
+                    this.currentPlayerIndex = i - 1;
                     return;
                 }
             }
         }
+
+        private void CheckIfPlayerOwnsFigure(IPlayer player, IFigure figure, Position from)
+        {
+            if (figure == null)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionMessages.EmptyPositionException, from.Col, from.Row));
+            }
+
+            if (figure.Color != player.Color)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionMessages.SelectingOpponentsFigureException, from.Col, from.Row));
+            }
+        }
+
+        private void CheckIfToPositionEmpty(IFigure figure, Position to)
+        {
+            var figureAtPosition = this.board.GetFigureAtPosition(to);
+
+            if (figureAtPosition != null && figureAtPosition.Color == figure.Color)
+            {
+                throw new InvalidOperationException(string.Format(ExceptionMessages.MovingFigureToAPositionWithYourFigureException, to.Col, to.Row));
+            }
+        }
+
     }
 }

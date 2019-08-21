@@ -34,6 +34,9 @@
             var currentRowPrint = startRowPrint;
             var currentColPrint = startColPrint;
 
+            //TODO: check this math
+            PrintBorder(board, startColPrint, startRowPrint, currentRowPrint, currentColPrint);
+
             Console.BackgroundColor = ConsoleColor.White;
 
             int counter = 1;
@@ -71,10 +74,61 @@
             }
         }
 
+        private static void PrintBorder(IBoard board, int startColPrint, int startRowPrint, int currentRowPrint, int currentColPrint)
+        {
+            var start = startRowPrint + ConsoleConstants.CharactersPerRowPerBoardSquare / 2;
+
+            for (int i = 0; i < board.TotalCols; i++)
+            {
+                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerRowPerBoardSquare, startRowPrint - 1);
+                Console.Write((char)('A' + i));
+                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerRowPerBoardSquare, startRowPrint + board.TotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare);
+                Console.Write((char)('A' + i));
+            }
+
+            start = startColPrint + ConsoleConstants.CharactersPerColPerBoardSquare / 2;
+            for (int i = 0; i < board.TotalRows; i++)
+            {
+                Console.SetCursorPosition(startColPrint - 1, start + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.Write(board.TotalRows - i);
+                Console.SetCursorPosition(startColPrint + board.TotalCols * ConsoleConstants.CharactersPerColPerBoardSquare, start + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.Write(board.TotalRows - i);
+            }
+
+
+            for (int i = startRowPrint - 2; i < startRowPrint + board.TotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(i, currentRowPrint - 2);
+                Console.WriteLine(" ");
+            }
+
+            for (int i = startRowPrint - 2; i < startRowPrint + board.TotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(i, currentRowPrint + board.TotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 1);
+                Console.WriteLine(" ");
+            }
+
+            for (int i = startColPrint - 2; i < startColPrint + board.TotalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(currentColPrint + board.TotalRows * ConsoleConstants.CharactersPerColPerBoardSquare + 1, i);
+                Console.WriteLine(" ");
+            }
+
+            for (int i = startColPrint - 2; i < startColPrint + board.TotalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 2; i++)
+            {
+                Console.BackgroundColor = DarkSquareConsoleColor;
+                Console.SetCursorPosition(currentColPrint - 2, i);
+                Console.WriteLine(" ");
+            }
+        }
+
         public void PrintErrorMessage(string message)
         {
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
-            Console.SetCursorPosition(Console.WindowWidth / 2 - message.Length / 2 + 3, ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - message.Length / 2, ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
             Console.Write(message);
 
             Thread.Sleep(2000);
