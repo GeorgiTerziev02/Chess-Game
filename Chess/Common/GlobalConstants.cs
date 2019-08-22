@@ -13,5 +13,8 @@
         public const char MaximumColumnValueOnBoard = 'h';
 
         public const string EmptyString = "";
+
+        public const int WhitePawnStartingRow = 2;
+        public const int BlackPawnStartingRow = 7;
     }
 }

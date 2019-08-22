@@ -21,20 +21,17 @@
             Console.SetCursorPosition(Console.WindowWidth / 2 - FontWarning.Length / 2, Console.WindowHeight / 2 + 2);
             Console.WriteLine(FontWarning);
 
-            //TODO: Add main menu
             Thread.Sleep(4000);
         }
 
         public void RenderBoard(IBoard board)
         {
-            //TODO: Validate Console dimensions
             var startColPrint = Console.WindowHeight / 2 - (board.TotalCols / 2) * ConsoleConstants.CharactersPerRowPerBoardSquare;
             var startRowPrint = Console.WindowWidth / 2 - (board.TotalRows / 2) * ConsoleConstants.CharactersPerColPerBoardSquare;
 
             var currentRowPrint = startRowPrint;
             var currentColPrint = startColPrint;
 
-            //TODO: check this math
             PrintBorder(board, startColPrint, startRowPrint, currentRowPrint, currentColPrint);
 
             Console.BackgroundColor = ConsoleColor.White;
@@ -80,18 +77,18 @@
 
             for (int i = 0; i < board.TotalCols; i++)
             {
-                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerRowPerBoardSquare, startRowPrint - 1);
+                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerColPerBoardSquare, startRowPrint - 1);
                 Console.Write((char)('A' + i));
-                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerRowPerBoardSquare, startRowPrint + board.TotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare);
+                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerColPerBoardSquare, startRowPrint + board.TotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare);
                 Console.Write((char)('A' + i));
             }
 
             start = startColPrint + ConsoleConstants.CharactersPerColPerBoardSquare / 2;
             for (int i = 0; i < board.TotalRows; i++)
             {
-                Console.SetCursorPosition(startColPrint - 1, start + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.SetCursorPosition(startColPrint - 1, start + i * ConsoleConstants.CharactersPerRowPerBoardSquare);
                 Console.Write(board.TotalRows - i);
-                Console.SetCursorPosition(startColPrint + board.TotalCols * ConsoleConstants.CharactersPerColPerBoardSquare, start + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.SetCursorPosition(startColPrint + board.TotalCols * ConsoleConstants.CharactersPerColPerBoardSquare, start + i * ConsoleConstants.CharactersPerRowPerBoardSquare);
                 Console.Write(board.TotalRows - i);
             }
 

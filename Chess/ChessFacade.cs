@@ -16,6 +16,7 @@
             ConsoleHelpers.SetConsoleAndBufferWidthAndHeigth();
 
             IRenderer renderer = new ConsoleRenderer();
+            //TODO: Remove comment
             //renderer.RenderMainMenu();
 
             IInputProvider inputProvider = new ConsoleInputProvider();

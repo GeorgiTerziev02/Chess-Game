@@ -45,7 +45,7 @@
                 {
                     var figureAtPosition = board.GetFigureAtPosition(to);
 
-                    if (figureAtPosition != null || figureAtPosition.Color == figure.Color)
+                    if (figureAtPosition != null && figureAtPosition.Color == figure.Color)
                     {
                         throw new InvalidOperationException(ExceptionMessages.FigureOnTheWayException);
                     }

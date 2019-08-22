@@ -108,10 +108,11 @@
             Console.SetCursorPosition(centerCol, centerRow);
         }
 
+        //Change to 80/80
         public static void SetConsoleAndBufferWidthAndHeigth()
         {
-            Console.SetWindowSize(80, 80);
-            Console.SetBufferSize(80, 80);
+            Console.SetWindowSize(90, 90);
+            Console.SetBufferSize(90, 90);
         }
 
         public static void PrintFigure(IFigure figure, ConsoleColor backgroundColor, int top, int left)

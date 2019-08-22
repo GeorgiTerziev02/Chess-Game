@@ -1,0 +1,10 @@
+Pawn to promotion commands
+e2-e4 \n
+d7-d5 \n
+e4-d5 \n
+e7-e6 \n
+d5-e6 \n
+f7-f5 \n
+e6-e7 \n
+h7-h5 \n
+e7-d8 \n

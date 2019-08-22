@@ -13,6 +13,8 @@
     using Chess.Figures.Contracts;
     using Chess.Movements.Contracts;
     using Chess.Movements.Strategies;
+    using Chess.Figures;
+    using Chess.SpecialFigureCases;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -69,12 +71,16 @@
                     var availableMovements = figure.Move(this.movementStrategy);
                     this.ValidateMovements(figure, availableMovements, move);
 
-
                     board.MoveFigureAtPosition(figure, from, to);
+
+                    //TODO: Check if pawn reached end
+                    if (figure.GetType().Name == "Pawn")
+                    {
+                        PawnCases.CheckIfPawnReachedEnd(board, figure, to, input);
+                    }
                     this.renderer.RenderBoard(board);
 
                     //TODO: Every move check if we are in check
-                    //TODO: Check if pawn reached end
                     //TODO: Check castle - check if castle is valid
                     //TODO: If not castle - Move figure (check pawn for an-pasan)
                     //TODO: check check
@@ -149,6 +155,7 @@
             var isFoundMove = false;
             Exception exception = new Exception();
 
+            //TODO: Rook cant move right/left
             foreach (var movement in availableMovements)
             {
                 try

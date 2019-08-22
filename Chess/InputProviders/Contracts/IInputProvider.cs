@@ -9,5 +9,7 @@
         IList<IPlayer> GetPlayers(int numberOfPlayers);
 
         Move GetNextPlayerMove(IPlayer player);
+
+        int GetPawnPromotion();
     }
 }
