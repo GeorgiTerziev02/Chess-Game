@@ -19,7 +19,10 @@
         public const string EmptyPositionException = "Position {0}{1} is empty!";
         public const string SelectingOpponentsFigureException = "Figure at Position {0}{1} is not yours!";
         public const string MovingFigureToAPositionWithYourFigureException = "You already have figure at Position {0}{1}!";
+        public const string FigureOnTheWayException = "There is figure on your way";
 
-        public const string InvalidPawnMovementBackwardsException = "Pawns cannot move backwards!";
+        public const string InvalidPawnMovementBackwardsException = "Pawn cannot move backwards!";
+        public const string InvalidPawnMovementSidewaysException = "Pawn cannot move this way!";
+        public const string InvalidBishopMovementSidewaysException = "Bishop cannot move this way!";
     }
 }

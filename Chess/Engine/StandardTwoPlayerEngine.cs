@@ -1,5 +1,6 @@
 ﻿namespace Chess.Engine
 {
+    using System;
     using System.Collections.Generic;
     using Chess.Common;
     using Chess.Board;
@@ -8,9 +9,9 @@
     using Chess.Players.Contracts;
     using Chess.Renderers.Contracts;
     using Chess.Board.Contracts;
-    using System;
-    using System.Linq;
     using Chess.Figures.Contracts;
+    using Chess.Movements.Contracts;
+    using Chess.Movements.Strategies;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -18,12 +19,15 @@
         private readonly IRenderer renderer;
         private readonly IInputProvider input;
         private readonly IBoard board;
+        private readonly IMovementStrategy movementStrategy;
 
         private int currentPlayerIndex;
         public StandardTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
             this.renderer = renderer;
             this.input = inputProvider;
+
+            this.movementStrategy = new NormalMovementStrategy();
             this.board = new Board();
             this.players = new List<IPlayer>();
         }
@@ -60,14 +64,18 @@
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionEmpty(figure, to);
 
-                    var availableMovements = figure.Move();
+                    var availableMovements = figure.Move(this.movementStrategy);
 
                     foreach (var movement in availableMovements)
                     {
                         movement.ValidateMove(figure, board, move);
                     }
 
+                    board.MoveFigureAtPosition(figure, from, to);
+                    this.renderer.RenderBoard(board);
+
                     //TODO: Every move check if we are in check
+                    //TODO: Check if pawn reached end
                     //TODO: Check castle - check if castle is valid
                     //TODO: If not castle - Move figure (check pawn for an-pasan)
                     //TODO: check check

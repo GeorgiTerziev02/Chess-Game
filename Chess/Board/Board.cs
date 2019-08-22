@@ -54,6 +54,17 @@
             return this.board[arrayRow, arrayCol];
         }
 
+        public void MoveFigureAtPosition(IFigure figure, Position from, Position to)
+        {
+            int arrayFromRow = GetArrayRow(from.Row);
+            int arrayFromCol = GetArrayCol(from.Col);
+            this.board[arrayFromRow, arrayFromCol] = null;
+
+            int arrayToRow = GetArrayRow(to.Row);
+            int arrayToCol = GetArrayCol(to.Col);
+            this.board[arrayToRow, arrayToCol] = figure;
+        }
+
         private int GetArrayRow(int chessRow)
         {
             return this.TotalRows - chessRow;
