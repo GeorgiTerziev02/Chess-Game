@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using Chess.Common;
     using Chess.Board;
     using Chess.Engine.Contracts;
@@ -64,12 +65,10 @@
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionEmpty(figure, to);
 
-                    var availableMovements = figure.Move(this.movementStrategy);
 
-                    foreach (var movement in availableMovements)
-                    {
-                        movement.ValidateMove(figure, board, move);
-                    }
+                    var availableMovements = figure.Move(this.movementStrategy);
+                    this.ValidateMovements(figure, availableMovements, move);
+
 
                     board.MoveFigureAtPosition(figure, from, to);
                     this.renderer.RenderBoard(board);
@@ -93,6 +92,7 @@
 
         }
 
+        //TODO: WinningConditions
         public void WinningConditions()
         {
 
@@ -144,5 +144,29 @@
             }
         }
 
+        private void ValidateMovements(IFigure figure, IEnumerable<IMovement> availableMovements, Move move)
+        {
+            var isFoundMove = false;
+            Exception exception = new Exception();
+
+            foreach (var movement in availableMovements)
+            {
+                try
+                {
+                    movement.ValidateMove(figure, this.board, move);
+                    isFoundMove = true;
+                    break;
+                }
+                catch (Exception e)
+                {
+                    exception = e;
+                }
+            }
+
+            if (isFoundMove == false)
+            {
+                throw exception;
+            }
+        }
     }
 }

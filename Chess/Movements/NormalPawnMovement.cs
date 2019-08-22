@@ -15,6 +15,8 @@
             var from = move.From;
             var to = move.To;
 
+            var figureAtPosition = board.GetFigureAtPosition(to);
+
             if (color == ChessColor.White && to.Row < from.Row)
             {
                 throw new InvalidOperationException(ExceptionMessages.InvalidPawnMovementBackwardsException);
@@ -27,9 +29,26 @@
 
             if (color == ChessColor.White)
             {
+
                 if (from.Row + 1 == to.Row && CheckDiagonalMove(from, to))
                 {
                     if (this.CheckOtherFigureIfValid(board, to, other))
+                    {
+                        return;
+                    }
+                }
+
+                if (from.Row == 2 && from.Col == to.Col)
+                {
+                    if (from.Row + 2 == to.Row && figureAtPosition == null)
+                    {
+                        return;
+                    }
+                }
+
+                if (from.Row + 1 == to.Row && from.Col == to.Col)
+                {
+                    if (figureAtPosition == null)
                     {
                         return;
                     }
@@ -40,6 +59,22 @@
                 if (from.Row - 1 == to.Row && CheckDiagonalMove(from, to))
                 {
                     if (this.CheckOtherFigureIfValid(board, to, other))
+                    {
+                        return;
+                    }
+                }
+
+                if (from.Row == 7 && from.Col == to.Col)
+                {
+                    if (from.Row - 2 == to.Row && figureAtPosition == null)
+                    {
+                        return;
+                    }
+                }
+
+                if (from.Row - 1 == to.Row && from.Col == to.Col)
+                {
+                    if (figureAtPosition == null)
                     {
                         return;
                     }
@@ -92,10 +127,10 @@
 
             if (otherFigure != null && otherFigure.Color == color)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
     }
 }

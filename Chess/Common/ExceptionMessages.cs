@@ -23,6 +23,9 @@
 
         public const string InvalidPawnMovementBackwardsException = "Pawn cannot move backwards!";
         public const string InvalidPawnMovementSidewaysException = "Pawn cannot move this way!";
-        public const string InvalidBishopMovementSidewaysException = "Bishop cannot move this way!";
+        public const string InvalidBishopMovementSidewaysException = "Bishop can move only diagonally!";
+        public const string InvalidKingMovementException = "King can move only on positions next to him!";
+        public const string InvalidKnightMovementException = "Knight cannnot move this way!";
+        public const string InvalidRookMovementException = "Rook cannnot move this way!";
     }
 }

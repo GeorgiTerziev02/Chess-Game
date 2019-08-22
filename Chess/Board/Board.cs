@@ -35,6 +35,7 @@
             this.board[arrayRow, arrayCol] = figure;
         }
 
+        //TODO: Not Used?
         public void RemoveFigure(Position position)
         {
             //Check for bugs later
