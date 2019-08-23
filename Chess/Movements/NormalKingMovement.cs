@@ -6,6 +6,7 @@
     using Chess.Common;
     using Chess.Figures.Contracts;
     using Chess.Movements.Contracts;
+    using Chess.SpecialFigureCases;
 
     public class NormalKingMovement : IMovement
     {
@@ -23,6 +24,11 @@
                 {
                     return;
                 }
+            }
+
+            if (KingCases.CheckCastling(board, figure, to))
+            {
+                return;
             }
 
             throw new InvalidOperationException(ExceptionMessages.InvalidKingMovementException);

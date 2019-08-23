@@ -26,7 +26,6 @@
                 throw new InvalidOperationException(ExceptionMessages.InvalidPawnMovementBackwardsException);
             }
 
-            //TODO: check for figure on the way jumping over other figures
             if (color == ChessColor.White)
             {
                 if (from.Row + 1 == to.Row && this.CheckDiagonalMove(from, to))
@@ -37,19 +36,29 @@
                     }
                 }
 
-                if (from.Row == 2 && from.Col == to.Col)
-                {
-                    if (from.Row + 2 == to.Row && figureAtPosition == null)
-                    {
-                        return;
-                    }
-                }
 
                 if (from.Row + 1 == to.Row && from.Col == to.Col)
                 {
                     if (figureAtPosition == null)
                     {
                         return;
+                    }
+                }
+
+                if (from.Row == GlobalConstants.WhitePawnStartingRow && from.Col == to.Col)
+                {
+                    Position checkIfInFrontOfPawnIsClear = Position.FromChessCoordinates(from.Row + 1, from.Col);
+
+                    if (board.GetFigureAtPosition(checkIfInFrontOfPawnIsClear) == null)
+                    {
+                        if (from.Row + 2 == to.Row && figureAtPosition == null)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(ExceptionMessages.FigureOnTheWayException);
                     }
                 }
             }
@@ -63,21 +72,28 @@
                     }
                 }
 
-                if (from.Row == 7 && from.Col == to.Col)
-                {
-                    if (from.Row - 2 == to.Row && figureAtPosition == null)
-                    {
-                        return;
-                    }
-                }
-
                 if (from.Row - 1 == to.Row && from.Col == to.Col)
                 {
                     if (figureAtPosition == null)
                     {
                         return;
                     }
+                }
 
+                if (from.Row == GlobalConstants.BlackPawnStartingRow && from.Col == to.Col)
+                {
+                    Position checkIfInFrontOfPawnIsClear = Position.FromChessCoordinates(from.Row - 1, from.Col);
+                    if (board.GetFigureAtPosition(checkIfInFrontOfPawnIsClear) == null)
+                    {
+                        if (from.Row - 2 == to.Row && figureAtPosition == null)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(ExceptionMessages.FigureOnTheWayException);
+                    }
                 }
             }
 

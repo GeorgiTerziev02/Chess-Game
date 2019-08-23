@@ -73,7 +73,6 @@
 
                     board.MoveFigureAtPosition(figure, from, to);
 
-                    //TODO: Check if pawn reached end
                     if (figure.GetType().Name == "Pawn")
                     {
                         PawnCases.CheckIfPawnReachedEnd(board, figure, to, input);
@@ -155,7 +154,6 @@
             var isFoundMove = false;
             Exception exception = new Exception();
 
-            //TODO: Rook cant move right/left
             foreach (var movement in availableMovements)
             {
                 try

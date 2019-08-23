@@ -64,9 +64,10 @@
         //TODO: Fix placement
         public int GetPawnPromotion()
         {
-            while (true)
+            int chosen = 0;
+
+            while (chosen == 0)
             {
-                int chosen = 1;
                 try
                 {
                     //Console.Clear();
@@ -79,19 +80,19 @@
                     chosen = int.Parse(Console.ReadLine());
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     IRenderer renderer = new ConsoleRenderer();
-                    renderer.PrintErrorMessage(ex.Message);
+                    renderer.PrintErrorMessage(ExceptionMessages.NumberOutOfRangeOneToFourException);
                 }
 
                 for (int row = 3; row <= 5; row++)
                 {
                     ConsoleHelpers.ClearRow(row);
                 }
-
-                return chosen;
             }
+
+            return chosen;
         }
     }
 }

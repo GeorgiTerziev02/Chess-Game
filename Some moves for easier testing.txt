@@ -1,0 +1,37 @@
+Pawn to promotion commands
+1 \n
+2 \n
+e2-e4 \n
+d7-d5 \n
+e4-d5 \n
+e7-e6 \n
+d5-e6 \n
+f7-f5 \n
+e6-e7 \n
+h7-h5 \n
+e7-d8 \n
+1 \n
+
+Castling white short
+1 \n
+2 \n
+g1-h3 \n
+a7-a6 \n
+e2-e4 \n
+b7-b6 \n
+f1-d3 \n
+c7-c6 \n
+e1-g1 \n
+
+Castlin white long
+1 \n
+2 \n
+b1-a3 \n
+a7-a6 \n
+d2-d4 \n
+b7-b6 \n
+c1-e3 \n
+c7-c6 \n
+d1-d2 \n
+d7-d6 \n
+e1-c1 \n
