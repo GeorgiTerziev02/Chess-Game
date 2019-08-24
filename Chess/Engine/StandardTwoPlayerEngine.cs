@@ -24,6 +24,7 @@
         private readonly IBoard board;
         private readonly IMovementStrategy movementStrategy;
 
+        private MovedFigures movedFigures;
         private int currentPlayerIndex;
         public StandardTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
@@ -33,6 +34,7 @@
             this.movementStrategy = new NormalMovementStrategy();
             this.board = new Board();
             this.players = new List<IPlayer>();
+            this.movedFigures = new MovedFigures();
         }
 
         public IEnumerable<IPlayer> Players
@@ -72,6 +74,7 @@
                     this.ValidateMovements(figure, availableMovements, move);
 
                     board.MoveFigureAtPosition(figure, from, to);
+                    movedFigures.CheckMovedFigures(board);
 
                     if (figure.GetType().Name == "Pawn")
                     {

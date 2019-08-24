@@ -10,6 +10,13 @@
 
     public class NormalKingMovement : IMovement
     {
+        private KingCases kingCases;
+
+        public NormalKingMovement()
+        {
+            this.kingCases = new KingCases();
+        }
+
         public void ValidateMove(IFigure figure, IBoard board, Move move)
         {
             var rowDistance = Math.Abs(move.From.Row - move.To.Row);
@@ -26,7 +33,7 @@
                 }
             }
 
-            if (KingCases.CheckCastling(board, figure, to))
+            if (this.kingCases.CheckCastling(board, figure, to))
             {
                 return;
             }

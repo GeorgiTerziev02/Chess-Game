@@ -29,5 +29,7 @@
         public const string InvalidKingMovementException = "King can move only on positions next to him!";
         public const string InvalidKnightMovementException = "Knight cannnot move this way!";
         public const string InvalidRookMovementException = "Rook cannnot move this way!";
+
+        public const string KnightOrKingHaveBeenMovedException = "Cannot castle if your King or Knight have already been moved!";
     }
 }

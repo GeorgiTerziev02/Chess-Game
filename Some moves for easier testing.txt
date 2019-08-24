@@ -11,6 +11,7 @@ e6-e7 \n
 h7-h5 \n
 e7-d8 \n
 1 \n
+a
 
 Castling white short
 1 \n
@@ -22,6 +23,20 @@ b7-b6 \n
 f1-d3 \n
 c7-c6 \n
 e1-g1 \n
+a
+
+Castling black short
+1 \n
+2 \n
+a2-a3 \n
+g8-h6 \n
+b2-b3 \n
+e7-e5 \n
+c2-c3 \n
+f8-d6 \n
+d2-d3 \n
+e8-g8 \n
+a
 
 Castlin white long
 1 \n
@@ -35,3 +50,41 @@ c7-c6 \n
 d1-d2 \n
 d7-d6 \n
 e1-c1 \n
+a
+
+Castle(long) with moved white king to throw exception
+1 \n
+2 \n
+b1-a3 \n
+a7-a6 \n
+d2-d4 \n
+b7-b6 \n
+c1-e3 \n
+c7-c6 \n
+d1-d2 \n
+d7-d6 \n
+e1-d1 \n
+e7-e6 \n
+d1-e1 \n
+f7-f6 \n
+e1-c1 \n
+a
+
+Castle(long) with moved black king to throw exception
+1 \n
+2 \n
+a2-a3 \n
+b8-a6 \n
+b2-b3 \n
+d7-d5 \n
+c2-c3 \n
+c8-e6 \n
+d2-d3 \n
+d8-d7 \n
+f2-f3 \n
+e8-d8 \n
+e2-e3 \n
+d8-e8 \n
+g2-g3 \n
+e8-c8 \n
+a
