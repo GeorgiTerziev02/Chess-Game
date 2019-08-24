@@ -33,7 +33,7 @@
                 }
             }
 
-            if (this.kingCases.CheckCastling(board, figure, to))
+            if (this.kingCases.CheckCastling(board, figure, move.From, to))
             {
                 return;
             }

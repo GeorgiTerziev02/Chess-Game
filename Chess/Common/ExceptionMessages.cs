@@ -30,6 +30,7 @@
         public const string InvalidKnightMovementException = "Knight cannnot move this way!";
         public const string InvalidRookMovementException = "Rook cannnot move this way!";
 
-        public const string KnightOrKingHaveBeenMovedException = "Cannot castle if your King or Knight have already been moved!";
+        public const string RookOrKingHaveBeenMovedException = "Cannot castle if your King or Rook have already been moved!";
+        public const string FiguresBetweenRookAndKingException = "Cannot castle if there are figures between the King and the Rook!";
     }
 }
