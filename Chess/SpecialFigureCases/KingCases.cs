@@ -28,6 +28,7 @@
         private readonly static Position BlackLongCastlingPosition = Position.FromChessCoordinates(8, 'c');
 
         //TODO: Validate Full castling
+        //TODO: Check for figures between
         public static bool CheckCastling(IBoard board, IFigure figure, Position to)
         {
             CheckMovedFigures(board);
@@ -60,47 +61,66 @@
                     }
                 }
             }
+
+            if (color == ChessColor.Black)
+            {
+                if (to.Row == BlackShortCastlingPosition.Row && to.Col == BlackShortCastlingPosition.Col)
+                {
+                    if (!IsBlackKingMoved && !IsBlackRightRookMoved)
+                    {
+                        board.RemoveFigure(BlackKingPosition);
+                        board.RemoveFigure(BlackRightRookPosition);
+
+                        board.AddFigure(new King(color), BlackShortCastlingPosition);
+                        board.AddFigure(new Rook(color), Position.FromChessCoordinates(8, 'f'));
+                        return true;
+                    }
+                }
+
+
+                if (to.Row == BlackLongCastlingPosition.Row && to.Col == BlackLongCastlingPosition.Col)
+                {
+                    if (!IsBlackKingMoved && !IsBlackLeftRookMoved)
+                    {
+                        board.RemoveFigure(BlackKingPosition);
+                        board.RemoveFigure(BlackLeftRookPosition);
+
+                        board.AddFigure(new King(color), BlackLongCastlingPosition);
+                        board.AddFigure(new Rook(color), Position.FromChessCoordinates(8, 'd'));
+                        return true;
+                    }
+                }
+            }
+     
             return false;
-            //if (color == ChessColor.Black)
-            //{
-            //    if (to.Row == BlackShortCastlingPosition.Row && to.Col == BlackShortCastlingPosition.Col)
-            //    {
-
-            //    }
-            //    if (to.Row == BlackLongCastlingPosition.Row && to.Col == BlackLongCastlingPosition.Col)
-            //    {
-
-            //    }
-            //}
-
         }
 
-        private static void CheckMovedFigures(IBoard board)
+    private static void CheckMovedFigures(IBoard board)
+    {
+        if (board.GetFigureAtPosition(WhiteKingPosition).GetType().Name != "King")
         {
-            if (board.GetFigureAtPosition(WhiteKingPosition).GetType().Name != "King")
-            {
-                IsWhiteKingMoved = true;
-            }
-            if (board.GetFigureAtPosition(BlackKingPosition).GetType().Name != "King")
-            {
-                IsBlackKingMoved = true;
-            }
-            if (board.GetFigureAtPosition(WhiteRightRookPosition).GetType().Name != "Rook")
-            {
-                IsWhiteRightRookMoved = true;
-            }
-            if (board.GetFigureAtPosition(WhiteLeftRookPosition).GetType().Name != "Rook")
-            {
-                IsWhiteLeftRookMoved = true;
-            }
-            if (board.GetFigureAtPosition(BlackLeftRookPosition).GetType().Name != "Rook")
-            {
-                IsBlackLeftRookMoved = true;
-            }
-            if (board.GetFigureAtPosition(BlackRightRookPosition).GetType().Name != "Rook")
-            {
-                IsBlackRightRookMoved = true;
-            }
+            IsWhiteKingMoved = true;
+        }
+        if (board.GetFigureAtPosition(BlackKingPosition).GetType().Name != "King")
+        {
+            IsBlackKingMoved = true;
+        }
+        if (board.GetFigureAtPosition(WhiteRightRookPosition).GetType().Name != "Rook")
+        {
+            IsWhiteRightRookMoved = true;
+        }
+        if (board.GetFigureAtPosition(WhiteLeftRookPosition).GetType().Name != "Rook")
+        {
+            IsWhiteLeftRookMoved = true;
+        }
+        if (board.GetFigureAtPosition(BlackLeftRookPosition).GetType().Name != "Rook")
+        {
+            IsBlackLeftRookMoved = true;
+        }
+        if (board.GetFigureAtPosition(BlackRightRookPosition).GetType().Name != "Rook")
+        {
+            IsBlackRightRookMoved = true;
         }
     }
+}
 }

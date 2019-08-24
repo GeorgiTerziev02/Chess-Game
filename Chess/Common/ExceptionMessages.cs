@@ -6,7 +6,7 @@
 
         public const string RowPositionOutOfBoardException = "Selected row position on the board is not valid!";
         public const string ColPositionOutOfBoardException = "Selected column position on the board is not valid!";
-        public const string PlayerNameLengthException = "Player name should be between 1 and 1 symbols!";
+        public const string PlayerNameLengthException = "Player name should be between 1 and 16 symbols!";
         public const string NumberOutOfRangeOneToFourException = "Choose number between 1 and 4!";
 
         public const string PlayerAlreadyOwnsFigureException = "This player already owns this figure!";
