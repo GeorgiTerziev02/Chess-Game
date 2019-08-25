@@ -32,5 +32,6 @@
 
         public const string RookOrKingHaveBeenMovedException = "Cannot castle if your King or Rook have already been moved!";
         public const string FiguresBetweenRookAndKingException = "Cannot castle if there are figures between the King and the Rook!";
+        public const string CheckMessage = "Check!";
     }
 }

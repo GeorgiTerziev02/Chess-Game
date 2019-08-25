@@ -21,6 +21,72 @@
         private readonly static Position BlackRightRookPosition = Position.FromChessCoordinates(8, 'h');
         private readonly static Position BlackLeftRookPosition = Position.FromChessCoordinates(8, 'a');
 
+
+        public static bool IsFieldAttacked(IBoard board, Position position, ChessColor currentPlayerColor)
+        {
+            //check for pawns
+
+            int startingRow = position.Row;
+            char startingCol = position.Col;
+
+            if (currentPlayerColor == ChessColor.White)
+            {
+                Position positionTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
+                Position positionTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
+
+                if (Position.CheckIsValid(positionTopLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionTopLeft);
+                    if (CheckFigure(figureTopLeft, "Pawn", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionTopRight))
+                {
+                    IFigure figureTopRight = board.GetFigureAtPosition(positionTopRight);
+
+                    if (CheckFigure(figureTopRight, "Pawn", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if (currentPlayerColor == ChessColor.Black)
+            {
+                Position positionDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
+                Position positionDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
+
+                if (Position.CheckIsValid(positionDownLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionDownLeft);
+                    if (CheckFigure(figureTopLeft, "Pawn", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionDownRight))
+                {
+                    IFigure figureTopRight = board.GetFigureAtPosition(positionDownRight);
+
+                    if (CheckFigure(figureTopRight, "Pawn", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+            }
+            //check for knight
+            //for queen - included in rook And Bishop?
+            //check for bishop
+            //check for rook
+            //check for king?
+
+            //fix
+            return false;
+        }
+
         public MovedFigures()
         {
             this.IsWhiteKingMoved = false;
@@ -84,6 +150,11 @@
             MoveFiguresInformation.isWhiteLeftRookMoved = this.IsWhiteLeftRookMoved;
             MoveFiguresInformation.isBlackRightRookMoved = this.IsBlackRightRookMoved;
             MoveFiguresInformation.isBlackLeftRookMoved = this.IsBlackLeftRookMoved;
+        }
+
+        private static bool CheckFigure(IFigure figure, string figureType, ChessColor color)
+        {
+            return figure != null && figure.GetType().Name == figureType && figure.Color == color;
         }
     }
 }

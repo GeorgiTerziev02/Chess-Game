@@ -38,5 +38,20 @@ namespace Chess.Common
         public int Row { get; private set; }
 
         public char Col { get; private set; }
+
+        public static bool CheckIsValid(Position position)
+        {
+            if (position.Row < GlobalConstants.MinimumRowValueOnBoard || position.Row > GlobalConstants.MaximumRowValueOnBoard)
+            {
+                return false;
+            }
+
+            if (position.Col < GlobalConstants.MinimumColumnValueOnBoard || position.Col > GlobalConstants.MaximumColumnValueOnBoard)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

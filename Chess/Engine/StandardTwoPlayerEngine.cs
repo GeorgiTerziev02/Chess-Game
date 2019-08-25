@@ -15,6 +15,7 @@
     using Chess.Movements.Strategies;
     using Chess.Figures;
     using Chess.SpecialFigureCases;
+    using System.Threading;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -61,6 +62,7 @@
                 try
                 {
                     var player = this.GetNextPlayer();
+                    ChessColor otherPlayerColor = GetOtherPlayerColor(player);
                     var move = this.input.GetNextPlayerMove(player);
 
                     var from = move.From;
@@ -68,7 +70,7 @@
                     var figure = this.board.GetFigureAtPosition(from);
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionEmpty(figure, to);
-
+                    //TODO: Every move check if we are in check
 
                     var availableMovements = figure.Move(this.movementStrategy);
                     this.ValidateMovements(figure, availableMovements, move);
@@ -76,13 +78,20 @@
                     board.MoveFigureAtPosition(figure, from, to);
                     movedFigures.CheckMovedFigures(board);
 
+
                     if (figure.GetType().Name == "Pawn")
                     {
                         PawnCases.CheckIfPawnReachedEnd(board, figure, to, input);
                     }
                     this.renderer.RenderBoard(board);
 
-                    //TODO: Every move check if we are in check
+                    //Test here
+                    if (MovedFigures.IsFieldAttacked(board, board.GetFigurePostionByTypeAndColor("King", otherPlayerColor), otherPlayerColor))
+                    {
+                        renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
+                    }
+                    //test ends
+
                     //TODO: Check castle - check if castle is valid
                     //TODO: If not castle - Move figure (check pawn for an-pasan)
                     //TODO: check check
@@ -176,5 +185,18 @@
                 throw exception;
             }
         }
+
+        private ChessColor GetOtherPlayerColor(IPlayer player)
+        {
+            if (player.Color == ChessColor.Black)
+            {
+                return ChessColor.White;
+            }
+            else
+            {
+                return ChessColor.Black;
+            }
+        }
+
     }
 }

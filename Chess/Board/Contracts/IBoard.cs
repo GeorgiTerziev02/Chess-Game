@@ -15,5 +15,7 @@
         IFigure GetFigureAtPosition(Position position);
 
         void MoveFigureAtPosition(IFigure figure, Position from, Position to);
+
+        Position GetFigurePostionByTypeAndColor(string type, ChessColor color);
     }
 }

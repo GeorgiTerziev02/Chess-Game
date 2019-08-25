@@ -88,3 +88,17 @@ d8-e8 \n
 g2-g3 \n
 e8-c8 \n
 a
+
+Check on white
+1 \n
+2 \n
+d2-d4 \n
+e7-e5 \n
+a2-a3 \n
+e5-d4 \n
+a3-a4 \n
+d4-d3 \n
+a4-a5 \n
+d3-d2 \n
+a
+
