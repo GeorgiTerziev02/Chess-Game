@@ -53,7 +53,8 @@
                     }
                 }
             }
-            else if (currentPlayerColor == ChessColor.Black)
+
+            if (currentPlayerColor == ChessColor.Black)
             {
                 Position positionDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
                 Position positionDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
@@ -61,6 +62,7 @@
                 if (Position.CheckIsValid(positionDownLeft))
                 {
                     IFigure figureTopLeft = board.GetFigureAtPosition(positionDownLeft);
+
                     if (CheckFigure(figureTopLeft, "Pawn", ChessColor.White))
                     {
                         return true;
@@ -78,12 +80,194 @@
                 }
             }
             //check for knight
+            if (currentPlayerColor == ChessColor.White)
+            {
+                Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
+                Position positionKnightTopRight = new Position(startingRow + 2, (char)(startingCol + 1));
+                Position positionKnightUpLeft = new Position(startingRow + 1, (char)(startingCol - 2));
+                Position positionKnightUpRight = new Position(startingRow + 1, (char)(startingCol + 2));
+                Position positionKnightDownLeft = new Position(startingRow - 2, (char)(startingCol - 1));
+                Position positionKnightDownRight = new Position(startingRow - 2, (char)(startingCol + 1));
+                Position positionKnightLeft = new Position(startingRow - 1, (char)(startingCol - 2));
+                Position positionKnightRight = new Position(startingRow - 1, (char)(startingCol + 2));
+
+                if (Position.CheckIsValid(positionKnightTopLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightTopLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightTopRight))
+                {
+                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightTopRight);
+
+                    if (CheckFigure(figureTopRight, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightUpRight))
+                {
+                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightUpRight);
+
+                    if (CheckFigure(figureTopRight, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightUpLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightUpLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightDownLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightDownRight))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownRight);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightRight))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightRight);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            if (currentPlayerColor == ChessColor.Black)
+            {
+                Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
+                Position positionKnightTopRight = new Position(startingRow + 2, (char)(startingCol + 1));
+                Position positionKnightUpLeft = new Position(startingRow + 1, (char)(startingCol - 2));
+                Position positionKnightUpRight = new Position(startingRow + 1, (char)(startingCol + 2));
+                Position positionKnightDownLeft = new Position(startingRow - 2, (char)(startingCol - 1));
+                Position positionKnightDownRight = new Position(startingRow - 2, (char)(startingCol + 1));
+                Position positionKnightLeft = new Position(startingRow - 1, (char)(startingCol - 2));
+                Position positionKnightRight = new Position(startingRow - 1, (char)(startingCol + 2));
+
+                if (Position.CheckIsValid(positionKnightTopLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightTopLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightTopRight))
+                {
+                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightTopRight);
+
+                    if (CheckFigure(figureTopRight, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightUpRight))
+                {
+                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightUpRight);
+
+                    if (CheckFigure(figureTopRight, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightUpLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightUpLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightDownLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightDownRight))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownRight);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightLeft))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightLeft);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+
+                if (Position.CheckIsValid(positionKnightRight))
+                {
+                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightRight);
+
+                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    {
+                        return true;
+                    }
+                }
+            }
             //for queen - included in rook And Bishop?
-            //check for bishop
-            //check for rook
+            //TODO: check for bishop
+            //TODO: check for rook
             //check for king?
 
-            //fix
             return false;
         }
 

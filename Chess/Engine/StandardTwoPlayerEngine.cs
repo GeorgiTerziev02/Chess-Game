@@ -85,7 +85,7 @@
                     }
                     this.renderer.RenderBoard(board);
 
-                    //Test here
+                    //Test for check here - currently working on it
                     if (MovedFigures.IsFieldAttacked(board, board.GetFigurePostionByTypeAndColor("King", otherPlayerColor), otherPlayerColor))
                     {
                         renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);

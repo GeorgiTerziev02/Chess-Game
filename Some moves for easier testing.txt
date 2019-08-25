@@ -89,7 +89,7 @@ g2-g3 \n
 e8-c8 \n
 a
 
-Check on white
+Check on white with pawns
 1 \n
 2 \n
 d2-d4 \n
@@ -102,3 +102,19 @@ a4-a5 \n
 d3-d2 \n
 a
 
+check on both with horse
+1 \n
+2 \n
+g1-f3 \n
+g8-f6 \n
+f3-d4 \n
+f6-g4 \n
+d4-b5 \n
+g4-h2 \n
+b5-c7 \n
+h2-f3 \n
+c7-e6 \n
+f3-d4 \n
+e6-g7 \n
+d4-c2 \n
+a
