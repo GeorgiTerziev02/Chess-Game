@@ -24,10 +24,9 @@
 
         public static bool IsFieldAttacked(IBoard board, Position position, ChessColor currentPlayerColor)
         {
-            //check for pawns
-
             int startingRow = position.Row;
             char startingCol = position.Col;
+            var otherPlayerColor = GetOtherPlayerColor(currentPlayerColor);
 
             if (currentPlayerColor == ChessColor.White)
             {
@@ -79,7 +78,7 @@
                     }
                 }
             }
-            //check for knight
+
             if (currentPlayerColor == ChessColor.White)
             {
                 Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
@@ -263,9 +262,124 @@
                     }
                 }
             }
-            //for queen - included in rook And Bishop?
+
             //TODO: check for bishop
-            //TODO: check for rook
+
+            for (int i = startingRow + 1; i <= GlobalConstants.StandardGameTotalBoardRows; i++)
+            {
+                Position currentPosition = new Position(i, startingCol);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Rook" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            for (int i = startingRow - 1; i >= GlobalConstants.MinimumRowValueOnBoard; i--)
+            {
+                Position currentPosition = new Position(i, startingCol);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Rook" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            for (int i = (int)(startingCol) + 1; i <= GlobalConstants.StandardGameTotalBoardCols + 'a'; i++)
+            {
+                Position currentPosition = new Position(startingRow, (char)i);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Rook" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            for (int i = startingCol - 1; i >= 'a'; i--)
+            {
+                Position currentPosition = new Position(startingRow, (char)i);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Rook" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
             //check for king?
 
             return false;
@@ -339,6 +453,18 @@
         private static bool CheckFigure(IFigure figure, string figureType, ChessColor color)
         {
             return figure != null && figure.GetType().Name == figureType && figure.Color == color;
+        }
+
+        private static ChessColor GetOtherPlayerColor(ChessColor color)
+        {
+            if (color == ChessColor.Black)
+            {
+                return ChessColor.White;
+            }
+            else
+            {
+                return ChessColor.Black;
+            }
         }
     }
 }
