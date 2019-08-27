@@ -66,6 +66,25 @@
                 {
                     var player = this.GetNextPlayer();
                     ChessColor otherPlayerColor = GetOtherPlayerColor(player);
+
+                    check = CheckIfPlayerIsInCheck(check, player);
+                    //TODO: Every move check if we are in check
+                    //TODO: check check
+                    if (check == true)
+                    {
+                        renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
+                        //TODO: if(in check) check checkmate
+                    }
+                    else if (CheckDraw())
+                    {
+                        //TODO: if not in check - check draw
+                    }
+                    else if (Path())
+                    {
+
+                    }
+
+
                     var move = this.input.GetNextPlayerMove(player);
 
                     var from = move.From;
@@ -73,20 +92,6 @@
                     var figure = this.board.GetFigureAtPosition(from);
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionEmpty(figure, to);
-                    //TODO: Every move check if we are in check
-                    //TODO: check check
-                    if (check == true)
-                    {
-                        //TODO: if(in check) check checkmate
-                    }
-                    else if (CheckDraw())
-                    {
-                        //TODO: if not in check - check draw
-                    }
-                    //else if (Path())
-                    //{
-
-                    //}
 
                     var availableMovements = figure.Move(this.movementStrategy);
 
@@ -97,11 +102,17 @@
                     }
                     else
                     {
-                        this.ValidateMovements(figure, availableMovements, move);
+                        this.ValidateMovements(figure, availableMovements, move, player, check);
 
                         board.MoveFigureAtPosition(figure, from, to);
                         movedFigures.CheckMovedFigures(board);
                     }
+
+                    //check = CheckIfPlayerIsInCheck(check, player);
+                    //if (check == true)
+                    //{
+                    //    throw new InvalidOperationException(ExceptionMessages.YouAreInCheckException);
+                    //}
 
                     if (figure.GetType().Name == "Pawn")
                     {
@@ -110,15 +121,6 @@
                     }
 
                     this.renderer.RenderBoard(board);
-
-                    //Test for check here - currently working on it
-                    if (MovedFigures.IsFieldAttacked(board, board.GetFigurePostionByTypeAndColor("King", otherPlayerColor), otherPlayerColor))
-                    {
-                        renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
-                    }
-                    //test ends
-
-                    //Continue
 
                     roundCounter++;
                 }
@@ -129,6 +131,12 @@
                 }
 
             }
+
+        }
+
+        //TODO: WinningConditions
+        public void WinningConditions()
+        {
 
         }
 
@@ -145,10 +153,10 @@
             return false;
         }
 
-        //TODO: WinningConditions
-        public void WinningConditions()
+        //TODO: Path
+        private bool Path()
         {
-
+            return false;
         }
 
         private IPlayer GetNextPlayer()
@@ -197,18 +205,20 @@
             }
         }
 
-        private void ValidateMovements(IFigure figure, IEnumerable<IMovement> availableMovements, Move move)
+        private void ValidateMovements(IFigure figure, IEnumerable<IMovement> availableMovements, Move move, IPlayer player, bool check)
         {
             var isFoundMove = false;
             Exception exception = new Exception();
 
-            foreach (var movement in availableMovements)
+            foreach (IMovement movement in availableMovements)
             {
                 try
                 {
                     movement.ValidateMove(figure, this.board, move);
+
                     isFoundMove = true;
                     break;
+
                 }
                 catch (Exception e)
                 {
@@ -234,5 +244,18 @@
             }
         }
 
+        private bool CheckIfPlayerIsInCheck(bool check, IPlayer player)
+        {
+            if (MovedFigures.IsFieldAttacked(board, board.GetFigurePostionByTypeAndColor("King", player.Color), player.Color))
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
+
+            return check;
+        }
     }
 }
