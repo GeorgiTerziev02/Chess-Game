@@ -32,6 +32,9 @@
 
         public const string RookOrKingHaveBeenMovedException = "Cannot castle if your King or Rook have already been moved!";
         public const string FiguresBetweenRookAndKingException = "Cannot castle if there are figures between the King and the Rook!";
+        public const string CannotCastleIfKingIsInCheckException = "Cannot castle if your King is in check!";
+        public const string KingCannotCrossAttackedField = "Cannot castle if your King crosses attacked fields!";
+        public const string InvalidEnPassantMovementException = "Cannot perform En Passant movement!";
         public const string CheckMessage = "Check!";
     }
 }

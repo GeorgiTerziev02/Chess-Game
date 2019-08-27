@@ -41,7 +41,6 @@
         public void AddFigure(IFigure figure)
         {
             ObjectValidator.CheckIfObjectIsNull(figure, ExceptionMessages.NullFigureException);
-            //TODO: check figure and player color
             CheckIfFigureExists(figure);
             this.figures.Add(figure);
         }

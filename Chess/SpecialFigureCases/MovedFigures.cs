@@ -3,6 +3,7 @@
     using Chess.Board.Contracts;
     using Chess.Common;
     using Chess.Figures.Contracts;
+    using System;
 
     public class MovedFigures
     {
@@ -13,7 +14,6 @@
         private bool isBlackLeftRookMoved;
         private bool isWhiteLeftRookMoved;
 
-        //TODO: constants
         private readonly static Position WhiteKingPosition = Position.FromChessCoordinates(1, 'e');
         private readonly static Position BlackKingPosition = Position.FromChessCoordinates(8, 'e');
         private readonly static Position WhiteRightRookPosition = Position.FromChessCoordinates(1, 'h');
@@ -21,6 +21,10 @@
         private readonly static Position BlackRightRookPosition = Position.FromChessCoordinates(8, 'h');
         private readonly static Position BlackLeftRookPosition = Position.FromChessCoordinates(8, 'a');
 
+
+        //keeping the round
+        private int[] whiteSideThirdRow;
+        private int[] blackSideThirdRow;
 
         public static bool IsFieldAttacked(IBoard board, Position position, ChessColor currentPlayerColor)
         {
@@ -263,7 +267,142 @@
                 }
             }
 
-            //TODO: check for bishop
+            int row = startingRow;
+            char col = startingCol;
+
+            while (true)
+            {
+                row++;
+                col++;
+
+                Position currentPosition = new Position(row, col);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Bishop" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            row = startingRow;
+            col = startingCol;
+            while (true)
+            {
+                row++;
+                col--;
+
+                Position currentPosition = new Position(row, col);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Bishop" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            row = startingRow;
+            col = startingCol;
+            while (true)
+            {
+                row--;
+                col--;
+
+                Position currentPosition = new Position(row, col);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Bishop" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            row = startingRow;
+            col = startingCol;
+            while (true)
+            {
+                row--;
+                col++;
+
+                Position currentPosition = new Position(row, col);
+
+                if (!Position.CheckIsValid(currentPosition))
+                {
+                    break;
+                }
+
+                IFigure figure = board.GetFigureAtPosition(currentPosition);
+
+                if (figure != null && figure.Color == currentPlayerColor)
+                {
+                    break;
+                }
+
+                if (figure != null && figure.Color == otherPlayerColor)
+                {
+                    if (figure.GetType().Name == "Bishop" || figure.GetType().Name == "Queen")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
 
             for (int i = startingRow + 1; i <= GlobalConstants.StandardGameTotalBoardRows; i++)
             {
@@ -393,6 +532,9 @@
             this.IsWhiteRightRookMoved = false;
             this.IsBlackLeftRookMoved = false;
             this.IsWhiteLeftRookMoved = false;
+
+            whiteSideThirdRow = new int[8];
+            blackSideThirdRow = new int[8];
         }
 
         public bool IsWhiteKingMoved { get => isWhiteKingMoved; set => isWhiteKingMoved = value; }
@@ -406,7 +548,6 @@
         public bool IsBlackLeftRookMoved { get => isBlackLeftRookMoved; set => isBlackLeftRookMoved = value; }
 
         public bool IsWhiteLeftRookMoved { get => isWhiteLeftRookMoved; set => isWhiteLeftRookMoved = value; }
-
 
         public void CheckMovedFigures(IBoard board)
         {
@@ -448,6 +589,69 @@
             MoveFiguresInformation.isWhiteLeftRookMoved = this.IsWhiteLeftRookMoved;
             MoveFiguresInformation.isBlackRightRookMoved = this.IsBlackRightRookMoved;
             MoveFiguresInformation.isBlackLeftRookMoved = this.IsBlackLeftRookMoved;
+        }
+
+        public void CheckIfPawnHasMovedTwoSquares(IBoard board, IFigure pawn, Position from, Position to, int round)
+        {
+            int diff = Math.Abs(from.Row - to.Row);
+
+            if (from.Col == to.Col && diff == 2)
+            {
+                if (pawn.Color == ChessColor.White)
+                {
+                    whiteSideThirdRow[(int)(from.Col - 'a')] = round;
+                }
+                else if (pawn.Color == ChessColor.Black)
+                {
+                    blackSideThirdRow[(int)(from.Col - 'a')] = round;
+                }
+            }
+        }
+
+        public void CheckEnPassant(IBoard board, IFigure pawn, Position from, Position to, int round)
+        {
+            Position enPassantPosition = new Position(from.Row, (char)(to.Col));
+            IFigure otherPawn = board.GetFigureAtPosition(enPassantPosition);
+
+            if (otherPawn != null && otherPawn.GetType().Name == "Pawn")
+            {
+                if (otherPawn.Color != pawn.Color)
+                {
+                    if (otherPawn.Color == ChessColor.White)
+                    {
+                        if(whiteSideThirdRow[to.Col - 'a'] == round - 1)
+                        {
+                            board.MoveFigureAtPosition(pawn, from, to);
+                            board.RemoveFigure(enPassantPosition);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException(ExceptionMessages.InvalidEnPassantMovementException);
+                        }
+                    }
+                    else if (otherPawn.Color == ChessColor.Black)
+                    {
+                        if (blackSideThirdRow[to.Col - 'a'] == round - 1)
+                        {
+                            board.MoveFigureAtPosition(pawn, from, to);
+                            board.RemoveFigure(enPassantPosition);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException(ExceptionMessages.InvalidEnPassantMovementException);
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    throw new InvalidOperationException(ExceptionMessages.InvalidPawnMovementSidewaysException);
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException(ExceptionMessages.InvalidEnPassantMovementException);
+            }
         }
 
         private static bool CheckFigure(IFigure figure, string figureType, ChessColor color)

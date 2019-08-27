@@ -57,6 +57,9 @@
 
         public void Start()
         {
+            int roundCounter = 0;
+            bool check = false;
+
             while (true)
             {
                 try
@@ -71,18 +74,41 @@
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionEmpty(figure, to);
                     //TODO: Every move check if we are in check
+                    //TODO: check check
+                    if (check == true)
+                    {
+                        //TODO: if(in check) check checkmate
+                    }
+                    else if (CheckDraw())
+                    {
+                        //TODO: if not in check - check draw
+                    }
+                    //else if (Path())
+                    //{
+
+                    //}
 
                     var availableMovements = figure.Move(this.movementStrategy);
-                    this.ValidateMovements(figure, availableMovements, move);
 
-                    board.MoveFigureAtPosition(figure, from, to);
-                    movedFigures.CheckMovedFigures(board);
+                    //TODO: If not castle - Move figure (check pawn for an-pasan)
+                    if (figure.GetType().Name == "Pawn" && Math.Abs(from.Col - to.Col) == 1 && Math.Abs(from.Row - to.Row) == 1 && board.GetFigureAtPosition(to) == null)
+                    {
+                        movedFigures.CheckEnPassant(board, figure, from, to, roundCounter);
+                    }
+                    else
+                    {
+                        this.ValidateMovements(figure, availableMovements, move);
 
+                        board.MoveFigureAtPosition(figure, from, to);
+                        movedFigures.CheckMovedFigures(board);
+                    }
 
                     if (figure.GetType().Name == "Pawn")
                     {
                         PawnCases.CheckIfPawnReachedEnd(board, figure, to, input);
+                        movedFigures.CheckIfPawnHasMovedTwoSquares(board, figure, from, to, roundCounter);
                     }
+
                     this.renderer.RenderBoard(board);
 
                     //Test for check here - currently working on it
@@ -92,12 +118,9 @@
                     }
                     //test ends
 
-                    //TODO: Check castle - check if castle is valid
-                    //TODO: If not castle - Move figure (check pawn for an-pasan)
-                    //TODO: check check
-                    //TODO: if(in check) check checkmate
-                    //TODO: if not in check - check draw
                     //Continue
+
+                    roundCounter++;
                 }
                 catch (Exception ex)
                 {
@@ -107,6 +130,19 @@
 
             }
 
+        }
+
+        private bool CheckDraw()
+        {
+            Position whiteKing = board.GetFigurePostionByTypeAndColor("King", ChessColor.White);
+            Position blackKing = board.GetFigurePostionByTypeAndColor("King", ChessColor.Black);
+
+            if (whiteKing.Row != -1 && blackKing.Row != -1 && board.GetFigureCount() == 2)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         //TODO: WinningConditions

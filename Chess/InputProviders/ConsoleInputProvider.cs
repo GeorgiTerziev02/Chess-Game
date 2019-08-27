@@ -61,12 +61,11 @@
             return move;
         }
 
-        //TODO: Fix placement
         public int GetPawnPromotion()
         {
             int chosen = 0;
 
-            while (chosen == 0)
+            while (chosen < 1 || chosen > 4)
             {
                 try
                 {
@@ -79,6 +78,10 @@
                     Console.Write("Your choice - ");
                     chosen = int.Parse(Console.ReadLine());
 
+                    if (chosen < 1 || chosen > 4)
+                    {
+                        throw new InvalidOperationException();
+                    }
                 }
                 catch (Exception)
                 {

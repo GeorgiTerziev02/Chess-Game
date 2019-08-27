@@ -22,10 +22,6 @@
         private readonly int WhiteArmyRow = 1;
         private readonly int BlackArmyRow = 8;
 
-        //TODO: Create check if a square is attacked - to easy up the followings
-        //TODO: Validate Full castling
-        //TODO: Check if king crosses attacked fields
-        //king not in check before castle
         public bool CheckCastling(IBoard board, IFigure figure, Position from, Position to)
         {
             var color = figure.Color;
@@ -37,11 +33,15 @@
                     if (!MoveFiguresInformation.isWhiteKingMoved && !MoveFiguresInformation.isWhiteRightRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
+                        CheckIfKingIsInCheck(board, color);
+                        CheckIfKingCrossesAttackedField(board, WhiteKingPosition, WhiteShortCastlingPosition, color);
+
                         board.RemoveFigure(WhiteKingPosition);
                         board.RemoveFigure(WhiteRightRookPosition);
 
                         board.AddFigure(new King(color), WhiteShortCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(1, 'f'));
+
                         return true;
                     }
                     else
@@ -55,11 +55,15 @@
                     if (!MoveFiguresInformation.isWhiteKingMoved && !MoveFiguresInformation.isWhiteLeftRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
+                        CheckIfKingIsInCheck(board, color);
+                        CheckIfKingCrossesAttackedField(board, WhiteKingPosition, WhiteLongCastlingPosition, color);
+
                         board.RemoveFigure(WhiteKingPosition);
                         board.RemoveFigure(WhiteLeftRookPosition);
 
                         board.AddFigure(new King(color), WhiteLongCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(1, 'd'));
+
                         return true;
                     }
                     else
@@ -76,11 +80,15 @@
                     if (!MoveFiguresInformation.isBlackKingMoved && !MoveFiguresInformation.isBlackRightRookMoved && from.Col == BlackKingPosition.Col && from.Row == BlackKingPosition.Row)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
+                        CheckIfKingIsInCheck(board, color);
+                        CheckIfKingCrossesAttackedField(board, BlackKingPosition, BlackShortCastlingPosition, color);
+
                         board.RemoveFigure(BlackKingPosition);
                         board.RemoveFigure(BlackRightRookPosition);
 
                         board.AddFigure(new King(color), BlackShortCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(8, 'f'));
+
                         return true;
                     }
                     else
@@ -89,18 +97,20 @@
                     }
                 }
 
-
                 if (to.Row == BlackLongCastlingPosition.Row && to.Col == BlackLongCastlingPosition.Col && from.Col == BlackKingPosition.Col && from.Row == BlackKingPosition.Row)
                 {
                     if (!MoveFiguresInformation.isBlackKingMoved && !MoveFiguresInformation.isBlackLeftRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
+                        CheckIfKingIsInCheck(board, color);
+                        CheckIfKingCrossesAttackedField(board, BlackKingPosition, BlackLongCastlingPosition, color);
 
                         board.RemoveFigure(BlackKingPosition);
                         board.RemoveFigure(BlackLeftRookPosition);
 
                         board.AddFigure(new King(color), BlackLongCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(8, 'd'));
+
                         return true;
                     }
                     else
@@ -152,6 +162,44 @@
                         throw new InvalidOperationException(ExceptionMessages.FiguresBetweenRookAndKingException);
                     }
                 }
+            }
+        }
+
+        private void CheckIfKingCrossesAttackedField(IBoard board, Position from, Position to, ChessColor color)
+        {
+            if (to.Col < from.Col)
+            {
+                for (int i = to.Col; i <= from.Col; i++)
+                {
+                    Position currentPosition = Position.FromChessCoordinates(from.Row, (char)i);
+
+                    if (MovedFigures.IsFieldAttacked(board, currentPosition, color))
+                    {
+                        throw new InvalidOperationException(ExceptionMessages.KingCannotCrossAttackedField);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = from.Col + 1; i <= to.Col; i++)
+                {
+                    Position currentPosition = Position.FromChessCoordinates(from.Row, (char)i);
+
+                    if (MovedFigures.IsFieldAttacked(board, currentPosition, color))
+                    {
+                        throw new InvalidOperationException(ExceptionMessages.KingCannotCrossAttackedField);
+                    }
+                }
+            }
+        }
+
+        private void CheckIfKingIsInCheck(IBoard board, ChessColor color)
+        {
+            var position = board.GetFigurePostionByTypeAndColor("King", color);
+
+            if (MovedFigures.IsFieldAttacked(board, position, color))
+            {
+                throw new InvalidOperationException(ExceptionMessages.CannotCastleIfKingIsInCheckException);
             }
         }
     }

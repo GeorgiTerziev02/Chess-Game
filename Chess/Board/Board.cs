@@ -35,7 +35,6 @@
             this.board[arrayRow, arrayCol] = figure;
         }
 
-        //TODO: Not Used?
         public void RemoveFigure(Position position)
         {
             //Check for bugs later
@@ -91,6 +90,24 @@
             //}
 
             return Position.FromArrayCoordinates(row, col, GlobalConstants.MaximumRowValueOnBoard);
+        }
+
+        public int GetFigureCount()
+        {
+            int counter = 0;
+
+            for (int i = 0; i < TotalRows; i++)
+            {
+                for (int j = 0; j < TotalCols; j++)
+                {
+                    if (board[i, j] != null)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            return counter;
         }
 
         private int GetArrayRow(int chessRow)
