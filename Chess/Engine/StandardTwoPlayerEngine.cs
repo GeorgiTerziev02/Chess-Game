@@ -16,6 +16,7 @@
     using Chess.Figures;
     using Chess.SpecialFigureCases;
     using System.Threading;
+    using System.Linq;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -69,7 +70,6 @@
 
                     check = CheckIfPlayerIsInCheck(check, player);
                     //TODO: Every move check if we are in check
-                    //TODO: check check
                     if (check == true)
                     {
                         renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
@@ -77,11 +77,13 @@
                     }
                     else if (CheckDraw())
                     {
-                        //TODO: if not in check - check draw
+                        renderer.PrintEndGame("Draw! Due to impossility of checkmate!");
+                        Environment.Exit(0);
                     }
-                    else if (Path())
+                    else if (Path(board, player, check))
                     {
-
+                        renderer.PrintEndGame("Path!");
+                        Environment.Exit(0);
                     }
 
 
@@ -95,7 +97,6 @@
 
                     var availableMovements = figure.Move(this.movementStrategy);
 
-                    //TODO: If not castle - Move figure (check pawn for an-pasan)
                     if (figure.GetType().Name == "Pawn" && Math.Abs(from.Col - to.Col) == 1 && Math.Abs(from.Row - to.Row) == 1 && board.GetFigureAtPosition(to) == null)
                     {
                         movedFigures.CheckEnPassant(board, figure, from, to, roundCounter);
@@ -108,11 +109,6 @@
                         movedFigures.CheckMovedFigures(board);
                     }
 
-                    //check = CheckIfPlayerIsInCheck(check, player);
-                    //if (check == true)
-                    //{
-                    //    throw new InvalidOperationException(ExceptionMessages.YouAreInCheckException);
-                    //}
 
                     if (figure.GetType().Name == "Pawn")
                     {
@@ -145,18 +141,68 @@
             Position whiteKing = board.GetFigurePostionByTypeAndColor("King", ChessColor.White);
             Position blackKing = board.GetFigurePostionByTypeAndColor("King", ChessColor.Black);
 
-            if (whiteKing.Row != -1 && blackKing.Row != -1 && board.GetFigureCount() == 2)
+            int figuresCount = board.GetFigureCount();
+
+            if (whiteKing.Row != -1 && blackKing.Row != -1 && figuresCount == 2)
             {
                 return true;
+            }
+
+            if (figuresCount == 3)
+            {
+                Position whiteBishop = board.GetFigurePostionByTypeAndColor("Bishop", ChessColor.White);
+                Position whiteKnight = board.GetFigurePostionByTypeAndColor("Knight", ChessColor.White);
+                Position blackKnight = board.GetFigurePostionByTypeAndColor("Knight", ChessColor.Black);
+                Position blackBishop = board.GetFigurePostionByTypeAndColor("Bishop", ChessColor.Black);
+
+                if (whiteBishop.Row != -1 || whiteKnight.Row != -1 || blackBishop.Row != -1 || blackKnight.Row != -1)
+                {
+                    return true;
+                }
+
             }
 
             return false;
         }
 
-        //TODO: Path
-        private bool Path()
+        private bool Path(IBoard board, IPlayer player, bool check)
         {
-            return false;
+            Position playerKing = board.GetFigurePostionByTypeAndColor("King", player.Color);
+            Position leftFromKing = new Position(playerKing.Row, (char)(playerKing.Col - 1));
+            Position rightFromKing = new Position(playerKing.Row, (char)(playerKing.Col + 1));
+            Position downFromKing = new Position(playerKing.Row - 1, playerKing.Col);
+            Position upFromKing = new Position(playerKing.Row + 1, playerKing.Col);
+            Position leftUpFromKing = new Position(playerKing.Row + 1, (char)(playerKing.Col - 1));
+            Position leftDownFromKing = new Position(playerKing.Row - 1, (char)(playerKing.Col - 1));
+            Position rightUpFromKing = new Position(playerKing.Row + 1, (char)(playerKing.Col + 1));
+            Position rightDownFromKing = new Position(playerKing.Row - 1, (char)(playerKing.Col + 1));
+
+            List<Position> aroundTheKingPosition = new List<Position>()
+            {
+                leftFromKing,
+                leftDownFromKing,
+                leftUpFromKing,
+                downFromKing,
+                upFromKing,
+                rightFromKing,
+                rightDownFromKing,
+                rightUpFromKing
+            };
+
+            var validPositions = aroundTheKingPosition.Where(p => Position.CheckIsValid(p)).ToList();
+
+            if (check == false)
+            {
+                foreach (var position in validPositions)
+                {
+                    if (!MovedFigures.IsFieldAttacked(board, position, player.Color))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private IPlayer GetNextPlayer()

@@ -16,5 +16,7 @@
 
         public const int WhitePawnStartingRow = 2;
         public const int BlackPawnStartingRow = 7;
+
+        public const string OutputEndGame = "Game ended with ";
     }
 }

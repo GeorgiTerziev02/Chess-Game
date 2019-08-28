@@ -71,6 +71,15 @@
             }
         }
 
+        public void PrintEndGame(string message)
+        {
+            ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
+            Console.SetCursorPosition(Console.WindowWidth / 2 - message.Length / 2 - GlobalConstants.OutputEndGame.Length / 2, ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
+            Console.Write(GlobalConstants.OutputEndGame + message);
+
+            Thread.Sleep(10000);
+        }
+
         private static void PrintBorder(IBoard board, int startColPrint, int startRowPrint, int currentRowPrint, int currentColPrint)
         {
             var start = startRowPrint + ConsoleConstants.CharactersPerRowPerBoardSquare / 2;
