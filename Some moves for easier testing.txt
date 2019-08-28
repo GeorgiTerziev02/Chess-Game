@@ -129,7 +129,7 @@ b7-b5 \n
 a5-b6 \n
 a
 
-Draw (with check turned off)
+Draw (check functionality turned off)
 1 \n
 2 \n
 g1-f3 \n
@@ -182,7 +182,7 @@ e8-g8 \n
 g7-g8 \n
 a
 
-Check draw with only horse/bishop left (check turned off) TODO: you choose which one to be left
+Check draw with only horse/bishop left (check functionality turned off) TODO: you choose which one to be left
 1 \n
 2 \n
 g1-f3 \n
@@ -226,7 +226,7 @@ b1-c1 \n
 b8-c8 \n
 e8-f8 \n
 
-Path(check functionality turned off)
+Path (check functionality turned off)
 1 \n
 2 \n
 g1-f3 \n
@@ -287,3 +287,27 @@ f3-f4 \n
 h8-h7 \n
 f4-g5 \n
 a
+
+Testing check functionality (should throw exception)
+1 \n
+2 \n
+d2-d4 \n
+e7-e5 \n
+d4-d5 \n
+d8-h4 \n
+f2-f3 \n
+a
+
+Testing check functionality
+1 \n
+2 \n
+a2-a4 \n
+e7-e5 \n
+a4-a5 \n
+f8-b4 \n
+a5-a6 \n
+e5-e4 \n
+a6-b7 \n
+e4-e3 \n
+b2-b3 \n
+e3-d2 \n

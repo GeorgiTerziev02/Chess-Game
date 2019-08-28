@@ -138,7 +138,7 @@
             Console.Write(message);
 
             //TODO:
-            Thread.Sleep(200);
+            Thread.Sleep(2000);
 
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
         }

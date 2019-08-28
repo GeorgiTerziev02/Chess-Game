@@ -26,6 +26,7 @@
 
         private MovedFigures movedFigures;
         private int currentPlayerIndex;
+
         public StandardTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
             this.renderer = renderer;
@@ -67,7 +68,7 @@
                     ChessColor otherPlayerColor = GetOtherPlayerColor(player);
 
                     check = CheckIfPlayerIsInCheck(board, player);
-                    //TODO: Every move check if we are in check
+
                     if (check == true)
                     {
                         renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
@@ -102,10 +103,17 @@
                     else
                     {
                         this.ValidateMovements(figure, availableMovements, move, player, check);
-
+                        IFigure figureTaken = board.GetFigureAtPosition(to);
                         board.MoveFigureAtPosition(figure, from, to);
-                        movedFigures.CheckMovedFigures(board);
 
+                        check = CheckIfPlayerIsInCheck(board, player);
+
+                        if (check)
+                        {
+                            UndoMovement(board, figure, figureTaken, move);
+                        }
+
+                        movedFigures.CheckMovedFigures(board);
                     }
 
                     if (figure.GetType().Name == "Pawn")
@@ -303,6 +311,21 @@
             }
 
             return check;
+        }
+
+        private void UndoMovement(IBoard board, IFigure figure, IFigure figureTaken, Move move)
+        {
+            var from = move.To;
+            var to = move.From;
+
+            board.MoveFigureAtPosition(figure, from, to);
+
+            if (figureTaken != null)
+            {
+                board.AddFigure(figureTaken, from);
+            }
+
+            throw new InvalidOperationException(ExceptionMessages.YouAreInCheckException);
         }
     }
 }
