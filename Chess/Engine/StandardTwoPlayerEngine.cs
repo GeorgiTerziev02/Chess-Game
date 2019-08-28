@@ -2,21 +2,19 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    using Chess.Common;
     using Chess.Board;
-    using Chess.Engine.Contracts;
-    using Chess.InputProviders.Contracts;
-    using Chess.Players.Contracts;
-    using Chess.Renderers.Contracts;
     using Chess.Board.Contracts;
+    using Chess.Common;
+    using Chess.Engine.Contracts;
     using Chess.Figures.Contracts;
+    using Chess.InputProviders.Contracts;
     using Chess.Movements.Contracts;
     using Chess.Movements.Strategies;
-    using Chess.Figures;
+    using Chess.Players.Contracts;
+    using Chess.Renderers.Contracts;
     using Chess.SpecialFigureCases;
-    using System.Threading;
-    using System.Linq;
 
     public class StandardTwoPlayerEngine : IChessEngine
     {
@@ -68,7 +66,7 @@
                     var player = this.GetNextPlayer();
                     ChessColor otherPlayerColor = GetOtherPlayerColor(player);
 
-                    check = CheckIfPlayerIsInCheck(check, player);
+                    check = CheckIfPlayerIsInCheck(board, player);
                     //TODO: Every move check if we are in check
                     if (check == true)
                     {
@@ -107,8 +105,8 @@
 
                         board.MoveFigureAtPosition(figure, from, to);
                         movedFigures.CheckMovedFigures(board);
-                    }
 
+                    }
 
                     if (figure.GetType().Name == "Pawn")
                     {
@@ -155,7 +153,7 @@
                 Position blackKnight = board.GetFigurePostionByTypeAndColor("Knight", ChessColor.Black);
                 Position blackBishop = board.GetFigurePostionByTypeAndColor("Bishop", ChessColor.Black);
 
-                if (whiteBishop.Row != -1 || whiteKnight.Row != -1 || blackBishop.Row != -1 || blackKnight.Row != -1)
+                if (whiteBishop.Row != 9 || whiteKnight.Row != 9 || blackBishop.Row != 9 || blackKnight.Row != 9)
                 {
                     return true;
                 }
@@ -165,6 +163,7 @@
             return false;
         }
 
+        //TODO: Add available moves counter
         private bool Path(IBoard board, IPlayer player, bool check)
         {
             Position playerKing = board.GetFigurePostionByTypeAndColor("King", player.Color);
@@ -290,8 +289,10 @@
             }
         }
 
-        private bool CheckIfPlayerIsInCheck(bool check, IPlayer player)
+        private bool CheckIfPlayerIsInCheck(IBoard board, IPlayer player)
         {
+            bool check = false;
+
             if (MovedFigures.IsFieldAttacked(board, board.GetFigurePostionByTypeAndColor("King", player.Color), player.Color))
             {
                 check = true;

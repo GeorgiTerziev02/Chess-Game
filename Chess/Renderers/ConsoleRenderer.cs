@@ -137,7 +137,8 @@
             Console.SetCursorPosition(Console.WindowWidth / 2 - message.Length / 2, ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
             Console.Write(message);
 
-            Thread.Sleep(2000);
+            //TODO:
+            Thread.Sleep(200);
 
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForExceptionMessagesAndCommands);
         }

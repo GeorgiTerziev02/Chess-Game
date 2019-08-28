@@ -521,6 +521,96 @@
             }
             //check for king?
 
+            Position posTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
+            Position posTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
+            Position positionLeft = new Position(startingRow, (char)(startingCol - 1));
+            Position positionRight = new Position(startingRow, (char)(startingCol + 1));
+            Position posDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
+            Position posDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
+            Position positionTop = new Position(startingRow + 1, (char)(startingCol));
+            Position positionDown = new Position(startingRow - 1, (char)(startingCol));
+
+            if (Position.CheckIsValid(posTopLeft))
+            {
+                IFigure figureTopLeft = board.GetFigureAtPosition(posTopLeft);
+
+                if (CheckFigure(figureTopLeft, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(posTopRight))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(posTopRight);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(positionLeft))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(positionLeft);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(positionRight))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(positionRight);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(posDownLeft))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(posDownLeft);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(posDownRight))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(posDownRight);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(positionTop))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(positionTop);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+            if (Position.CheckIsValid(positionDown))
+            {
+                IFigure figureTopRight = board.GetFigureAtPosition(positionDown);
+
+                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
+                {
+                    return true;
+                }
+            }
+
+
             return false;
         }
 
@@ -619,7 +709,7 @@
                 {
                     if (otherPawn.Color == ChessColor.White)
                     {
-                        if(whiteSideThirdRow[to.Col - 'a'] == round - 1)
+                        if (whiteSideThirdRow[to.Col - 'a'] == round - 1)
                         {
                             board.MoveFigureAtPosition(pawn, from, to);
                             board.RemoveFigure(enPassantPosition);
@@ -641,7 +731,7 @@
                             throw new InvalidOperationException(ExceptionMessages.InvalidEnPassantMovementException);
                         }
                     }
-                    
+
                 }
                 else
                 {
