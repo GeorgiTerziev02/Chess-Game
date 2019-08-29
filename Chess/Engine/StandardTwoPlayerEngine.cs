@@ -71,20 +71,21 @@
 
                     if (check == true)
                     {
-                        //TODO: if(in check) check checkmate
                         if (CheckCheckmate(board, player))
                         {
-                            renderer.PrintEndGame($"{otherPlayerColor} wins!");
+                            renderer.PrintEndGame($"{otherPlayerColor} winning!");
                             Environment.Exit(0);
                         }
 
                         renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
                     }
+
                     else if (CheckDraw())
                     {
                         renderer.PrintEndGame("Draw! Due to impossility of checkmate!");
                         Environment.Exit(0);
                     }
+
                     else if (Path(board, player, check))
                     {
                         renderer.PrintEndGame("Path!");
@@ -189,7 +190,6 @@
             return false;
         }
 
-        //TODO: Add available moves counter
         private bool Path(IBoard board, IPlayer player, bool check)
         {
             Position playerKing = board.GetFigurePostionByTypeAndColor("King", player.Color);

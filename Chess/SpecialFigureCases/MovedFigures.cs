@@ -629,6 +629,7 @@
             return availableMoves;
         }
 
+        //TODO: refactor
         private static int GetFigureAvailableMoves(IBoard board, Position figurePosition)
         {
             int available = 0;
@@ -637,7 +638,6 @@
             int startingRow = figurePosition.Row;
             char startingCol = figurePosition.Col;
 
-            //TODO: pawn
             if (figure.GetType().Name == "King")
             {
                 Position posTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
@@ -1445,10 +1445,194 @@
                     }
                 }
             }
-            //if (figure.GetType().Name == "Pawn")
-            //{
+            if (figure.GetType().Name == "Pawn")
+            {
+                if (figure.Color == ChessColor.White)
+                {
+                    Position positionTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
+                    Position positionTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
+                    Position positionTop = new Position(startingRow + 1, (char)(startingCol));
+                    Position positionTwoTop = new Position(startingRow + 2, (char)(startingCol));
 
-            //}
+                    if (Position.CheckIsValid(positionTopLeft))
+                    {
+                        IFigure figureTopLeft = board.GetFigureAtPosition(positionTopLeft);
+
+                        if (figureTopLeft != null)
+                        {
+                            board.AddFigure(figure, positionTopLeft);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(figureTopLeft, positionTopLeft);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+
+                    if (Position.CheckIsValid(positionTopRight))
+                    {
+                        IFigure figureTopRight = board.GetFigureAtPosition(positionTopRight);
+
+                        if (figureTopRight != null)
+                        {
+                            board.AddFigure(figure, positionTopRight);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(figureTopRight, positionTopRight);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+
+                    if (Position.CheckIsValid(positionTop))
+                    {
+                        IFigure figureTop = board.GetFigureAtPosition(positionTop);
+
+                        if (figureTop == null)
+                        {
+                            board.AddFigure(figure, positionTop);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(null, positionTop);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+
+                    if (Position.CheckIsValid(positionTwoTop))
+                    {
+                        IFigure figureTop = board.GetFigureAtPosition(positionTwoTop);
+                        IFigure figureTwoTop = board.GetFigureAtPosition(positionTwoTop);
+
+                        if (figureTwoTop == null && figureTop ==null)
+                        {
+                            board.AddFigure(figure, positionTwoTop);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(null, positionTwoTop);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+                }
+
+                if (figure.Color == ChessColor.Black)
+                {
+                    Position positionDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
+                    Position positionDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
+                    Position positionDown = new Position(startingRow - 1, (char)(startingCol));
+                    Position positionTwoDown = new Position(startingRow - 2, (char)(startingCol));
+
+                    if (Position.CheckIsValid(positionDownLeft))
+                    {
+                        IFigure figureDownLeft = board.GetFigureAtPosition(positionDownLeft);
+
+                        if (figureDownLeft != null)
+                        {
+                            board.AddFigure(figure, positionDownLeft);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(figureDownLeft, positionDownLeft);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+
+                    if (Position.CheckIsValid(positionDownRight))
+                    {
+                        IFigure figureDownRight = board.GetFigureAtPosition(positionDownRight);
+
+                        if (figureDownRight != null)
+                        {
+                            board.AddFigure(figure, positionDownRight);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(figureDownRight, positionDownRight);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+
+                    if (Position.CheckIsValid(positionDown))
+                    {
+                        IFigure figureDown = board.GetFigureAtPosition(positionDown);
+
+                        if (figureDown == null)
+                        {
+                            board.AddFigure(figure, positionDown);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(null, positionDown);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+
+                    if (Position.CheckIsValid(positionTwoDown))
+                    {
+                        IFigure figureTwoDown = board.GetFigureAtPosition(positionTwoDown);
+                        IFigure figureDown = board.GetFigureAtPosition(positionDown);
+
+                        if (figureTwoDown == null && figureDown == null)
+                        {
+                            board.AddFigure(figure, positionTwoDown);
+                            board.AddFigure(null, figurePosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(null, positionTwoDown);
+                            board.AddFigure(figure, figurePosition);
+                        }
+                    }
+                }
+            }
 
             return available;
         }
