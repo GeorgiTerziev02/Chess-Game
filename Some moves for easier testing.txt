@@ -311,3 +311,27 @@ a6-b7 \n
 e4-e3 \n
 b2-b3 \n
 e3-d2 \n
+
+Checkmate - should not happpen
+1 \n
+2 \n
+g1-f3 \n
+g8-f6 \n
+f3-d4 \n
+f6-g4 \n
+d4-b5 \n
+g4-h2 \n
+b5-c7 \n
+a
+
+Quick checkmate
+1 \n
+2 \n
+e2-e4 \n
+a7-a6 \n
+f1-c4 \n
+a6-a5 \n
+d1-f3 \n
+b7-b6 \n
+f3-f7 \n
+A

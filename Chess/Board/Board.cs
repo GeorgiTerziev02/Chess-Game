@@ -1,6 +1,7 @@
 ﻿namespace Chess.Board
 {
     using System;
+    using System.Collections.Generic;
     using Chess.Board.Contracts;
     using Chess.Common;
     using Chess.Figures.Contracts;
@@ -25,7 +26,8 @@
 
         public void AddFigure(IFigure figure, Position position)
         {
-            ObjectValidator.CheckIfObjectIsNull(figure, ExceptionMessages.NullFigureException);
+            //TODO: Remove comment and create new method if needed
+            //ObjectValidator.CheckIfObjectIsNull(figure, ExceptionMessages.NullFigureException);
 
             this.CheckIfPositionIsValid(position);
 
@@ -110,6 +112,26 @@
             return counter;
         }
 
+        public List<Position> GetAllFiguresPostionsByColor(ChessColor color)
+        {
+            var figuresPositions = new List<Position>();
+
+            for (int i = 0; i < TotalRows; i++)
+            {
+                for (int j = 0; j < TotalCols; j++)
+                {
+                    IFigure currentFigure = this.board[i, j];
+                    if (currentFigure != null && currentFigure.Color == color)
+                    {
+                        Position position = Position.FromArrayCoordinates(i, j, TotalRows);
+                        figuresPositions.Add(position);
+                    }
+                }
+            }
+
+            return figuresPositions;
+        }
+
         private int GetArrayRow(int chessRow)
         {
             return this.TotalRows - chessRow;
@@ -124,5 +146,6 @@
         {
             Position.CheckIfValid(position);
         }
+
     }
 }

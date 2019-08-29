@@ -71,8 +71,14 @@
 
                     if (check == true)
                     {
-                        renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
                         //TODO: if(in check) check checkmate
+                        if (CheckCheckmate(board, player))
+                        {
+                            renderer.PrintEndGame($"{otherPlayerColor} wins!");
+                            Environment.Exit(0);
+                        }
+
+                        renderer.PrintErrorMessage(ExceptionMessages.CheckMessage);
                     }
                     else if (CheckDraw())
                     {
@@ -140,6 +146,18 @@
         public void WinningConditions()
         {
 
+        }
+
+        private bool CheckCheckmate(IBoard board, IPlayer player)
+        {
+            int availableMoves = MovedFigures.GetAvailableMoves(board, player);
+
+            if (availableMoves == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private bool CheckDraw()

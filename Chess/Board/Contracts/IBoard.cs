@@ -2,6 +2,7 @@
 {
     using Chess.Common;
     using Chess.Figures.Contracts;
+    using System.Collections.Generic;
 
     public interface IBoard
     {
@@ -19,5 +20,7 @@
         Position GetFigurePostionByTypeAndColor(string type, ChessColor color);
 
         int GetFigureCount();
+
+        List<Position> GetAllFiguresPostionsByColor(ChessColor color);
     }
 }
