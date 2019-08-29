@@ -532,86 +532,30 @@
             Position positionTop = new Position(startingRow + 1, (char)(startingCol));
             Position positionDown = new Position(startingRow - 1, (char)(startingCol));
 
-            if (Position.CheckIsValid(posTopLeft))
+            List<Position> positionsAroundTheKing = new List<Position>()
             {
-                IFigure figureTopLeft = board.GetFigureAtPosition(posTopLeft);
+                    posTopLeft,
+                    posTopRight,
+                    positionLeft,
+                    positionRight,
+                    posDownLeft,
+                    posDownRight,
+                    positionTop,
+                    positionDown
+            };
 
-                if (CheckFigure(figureTopLeft, "King", otherPlayerColor))
+            foreach (var currentPosition in positionsAroundTheKing)
+            {
+                if (Position.CheckIsValid(currentPosition))
                 {
-                    return true;
+                    IFigure currentFigure = board.GetFigureAtPosition(currentPosition);
+
+                    if (CheckFigure(currentFigure, "King", otherPlayerColor))
+                    {
+                        return true;
+                    }
                 }
             }
-
-            if (Position.CheckIsValid(posTopRight))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(posTopRight);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
-            if (Position.CheckIsValid(positionLeft))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(positionLeft);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
-            if (Position.CheckIsValid(positionRight))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(positionRight);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
-            if (Position.CheckIsValid(posDownLeft))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(posDownLeft);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
-            if (Position.CheckIsValid(posDownRight))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(posDownRight);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
-            if (Position.CheckIsValid(positionTop))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(positionTop);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
-            if (Position.CheckIsValid(positionDown))
-            {
-                IFigure figureTopRight = board.GetFigureAtPosition(positionDown);
-
-                if (CheckFigure(figureTopRight, "King", otherPlayerColor))
-                {
-                    return true;
-                }
-            }
-
 
             return false;
         }
@@ -649,85 +593,31 @@
                 Position positionTop = new Position(startingRow + 1, (char)(startingCol));
                 Position positionDown = new Position(startingRow - 1, (char)(startingCol));
 
-                if (Position.CheckIsValid(posTopLeft))
+                List<Position> positionsAroundTheKing = new List<Position>()
                 {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(posTopLeft);
+                    posTopLeft,
+                    posTopRight,
+                    positionLeft,
+                    positionRight,
+                    posDownLeft,
+                    posDownRight,
+                    positionTop,
+                    positionDown
+                };
 
-                    if ((figureTopLeft == null || figureTopLeft.Color != figure.Color) && IsFieldAttacked(board, posTopLeft, figure.Color) == false)
+                foreach (var position in positionsAroundTheKing)
+                {
+                    if (Position.CheckIsValid(position))
                     {
-                        available++;
+                        IFigure figureAtCurrentPosition = board.GetFigureAtPosition(position);
+
+                        if ((figureAtCurrentPosition == null || figureAtCurrentPosition.Color != figure.Color) && IsFieldAttacked(board, position, figure.Color) == false)
+                        {
+                            available++;
+                        }
                     }
                 }
 
-                if (Position.CheckIsValid(posTopRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(posTopRight);
-
-                    if ((figureTopRight == null || figureTopRight.Color != figure.Color) && IsFieldAttacked(board, posTopRight, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionLeft))
-                {
-                    IFigure figureLeft = board.GetFigureAtPosition(positionLeft);
-
-                    if ((figureLeft == null || figureLeft.Color != figure.Color) && IsFieldAttacked(board, positionLeft, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionRight))
-                {
-                    IFigure figureRight = board.GetFigureAtPosition(positionRight);
-
-                    if ((figureRight == null || figureRight.Color != figure.Color) && IsFieldAttacked(board, positionRight, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
-
-                if (Position.CheckIsValid(posDownLeft))
-                {
-                    IFigure figureDownLeft = board.GetFigureAtPosition(posDownLeft);
-
-                    if ((figureDownLeft == null || figureDownLeft.Color != figure.Color) && IsFieldAttacked(board, posDownLeft, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
-
-                if (Position.CheckIsValid(posDownRight))
-                {
-                    IFigure figureDownRight = board.GetFigureAtPosition(posDownRight);
-
-                    if ((figureDownRight == null || figureDownRight.Color != figure.Color) && IsFieldAttacked(board, posDownRight, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionTop))
-                {
-                    IFigure figureTop = board.GetFigureAtPosition(positionTop);
-
-                    if ((figureTop == null || figureTop.Color != figure.Color) && IsFieldAttacked(board, positionTop, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionDown))
-                {
-                    IFigure figureDown = board.GetFigureAtPosition(positionDown);
-
-                    if ((figureDown == null || figureDown.Color != figure.Color) && IsFieldAttacked(board, positionDown, figure.Color) == false)
-                    {
-                        available++;
-                    }
-                }
             }
             if (figure.GetType().Name == "Queen" || figure.GetType().Name == "Bishop")
             {
@@ -1522,7 +1412,7 @@
                         IFigure figureTop = board.GetFigureAtPosition(positionTwoTop);
                         IFigure figureTwoTop = board.GetFigureAtPosition(positionTwoTop);
 
-                        if (figureTwoTop == null && figureTop ==null)
+                        if (figureTwoTop == null && figureTop == null)
                         {
                             board.AddFigure(figure, positionTwoTop);
                             board.AddFigure(null, figurePosition);

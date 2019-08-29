@@ -1,5 +1,6 @@
 ﻿namespace Chess
 {
+    using System;
     using Chess.Common.Console;
     using Chess.Engine;
     using Chess.Engine.Contracts;
@@ -14,10 +15,10 @@
         public static void Start()
         {
             ConsoleHelpers.SetConsoleAndBufferWidthAndHeigth();
+            Console.Title = "ChessGame";
 
             IRenderer renderer = new ConsoleRenderer();
-            //TODO: Remove comment
-            //renderer.RenderMainMenu();
+            renderer.RenderMainMenu();
 
             IInputProvider inputProvider = new ConsoleInputProvider();
             IGameInitializationStrategy gameInitializationStrategy = new StandardStartGameInitializationStrategy();
