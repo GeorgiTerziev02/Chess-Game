@@ -143,12 +143,6 @@
 
         }
 
-        //TODO: WinningConditions
-        public void WinningConditions()
-        {
-
-        }
-
         private bool CheckCheckmate(IBoard board, IPlayer player)
         {
             int availableMoves = MovedFigures.GetAvailableMoves(board, player);

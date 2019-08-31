@@ -39,20 +39,15 @@
                 Position positionTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
                 Position positionTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
 
-                if (Position.CheckIsValid(positionTopLeft))
+                var diagonalPossiblePawnPositions = new List<Position>()
                 {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionTopLeft);
-                    if (CheckFigure(figureTopLeft, "Pawn", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
+                    positionTopLeft,
+                    positionTopRight
+                };
 
-                if (Position.CheckIsValid(positionTopRight))
+                foreach (var possiblePosition in diagonalPossiblePawnPositions)
                 {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionTopRight);
-
-                    if (CheckFigure(figureTopRight, "Pawn", ChessColor.Black))
+                    if (CheckForPawn(board, possiblePosition, otherPlayerColor))
                     {
                         return true;
                     }
@@ -64,205 +59,30 @@
                 Position positionDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
                 Position positionDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
 
-                if (Position.CheckIsValid(positionDownLeft))
+                var diagonalPossiblePawnPositions = new List<Position>()
                 {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionDownLeft);
+                    positionDownLeft,
+                    positionDownRight
+                };
 
-                    if (CheckFigure(figureTopLeft, "Pawn", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionDownRight))
+                foreach (var possiblePosition in diagonalPossiblePawnPositions)
                 {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionDownRight);
-
-                    if (CheckFigure(figureTopRight, "Pawn", ChessColor.White))
+                    if (CheckForPawn(board, possiblePosition, otherPlayerColor))
                     {
                         return true;
                     }
                 }
             }
 
-            if (currentPlayerColor == ChessColor.White)
+            List<Position> possibleKnightPositions = GetPossibleKnightPositions(startingRow, startingCol);
+
+            foreach (var possibleKnightPosition in possibleKnightPositions)
             {
-                Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
-                Position positionKnightTopRight = new Position(startingRow + 2, (char)(startingCol + 1));
-                Position positionKnightUpLeft = new Position(startingRow + 1, (char)(startingCol - 2));
-                Position positionKnightUpRight = new Position(startingRow + 1, (char)(startingCol + 2));
-                Position positionKnightDownLeft = new Position(startingRow - 2, (char)(startingCol - 1));
-                Position positionKnightDownRight = new Position(startingRow - 2, (char)(startingCol + 1));
-                Position positionKnightLeft = new Position(startingRow - 1, (char)(startingCol - 2));
-                Position positionKnightRight = new Position(startingRow - 1, (char)(startingCol + 2));
-
-                if (Position.CheckIsValid(positionKnightTopLeft))
+                if (Position.CheckIsValid(possibleKnightPosition))
                 {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightTopLeft);
+                    IFigure figureAtPosition = board.GetFigureAtPosition(possibleKnightPosition);
 
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightTopRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightTopRight);
-
-                    if (CheckFigure(figureTopRight, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightUpRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightUpRight);
-
-                    if (CheckFigure(figureTopRight, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightUpLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightUpLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightDownLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightDownRight))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownRight);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightRight))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightRight);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.Black))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            if (currentPlayerColor == ChessColor.Black)
-            {
-                Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
-                Position positionKnightTopRight = new Position(startingRow + 2, (char)(startingCol + 1));
-                Position positionKnightUpLeft = new Position(startingRow + 1, (char)(startingCol - 2));
-                Position positionKnightUpRight = new Position(startingRow + 1, (char)(startingCol + 2));
-                Position positionKnightDownLeft = new Position(startingRow - 2, (char)(startingCol - 1));
-                Position positionKnightDownRight = new Position(startingRow - 2, (char)(startingCol + 1));
-                Position positionKnightLeft = new Position(startingRow - 1, (char)(startingCol - 2));
-                Position positionKnightRight = new Position(startingRow - 1, (char)(startingCol + 2));
-
-                if (Position.CheckIsValid(positionKnightTopLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightTopLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightTopRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightTopRight);
-
-                    if (CheckFigure(figureTopRight, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightUpRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightUpRight);
-
-                    if (CheckFigure(figureTopRight, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightUpLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightUpLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightDownLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightDownRight))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownRight);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightLeft);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
-                    {
-                        return true;
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightRight))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightRight);
-
-                    if (CheckFigure(figureTopLeft, "Knight", ChessColor.White))
+                    if (CheckFigure(figureAtPosition, "Knight", otherPlayerColor))
                     {
                         return true;
                     }
@@ -523,26 +343,7 @@
             }
 
             //check for king
-            Position posTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
-            Position posTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
-            Position positionLeft = new Position(startingRow, (char)(startingCol - 1));
-            Position positionRight = new Position(startingRow, (char)(startingCol + 1));
-            Position posDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
-            Position posDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
-            Position positionTop = new Position(startingRow + 1, (char)(startingCol));
-            Position positionDown = new Position(startingRow - 1, (char)(startingCol));
-
-            List<Position> positionsAroundTheKing = new List<Position>()
-            {
-                    posTopLeft,
-                    posTopRight,
-                    positionLeft,
-                    positionRight,
-                    posDownLeft,
-                    posDownRight,
-                    positionTop,
-                    positionDown
-            };
+            List<Position> positionsAroundTheKing = GetPossibleKingPostions(startingRow, startingCol);
 
             foreach (var currentPosition in positionsAroundTheKing)
             {
@@ -554,6 +355,20 @@
                     {
                         return true;
                     }
+                }
+            }
+
+            return false;
+        }
+
+        private static bool CheckForPawn(IBoard board, Position possiblePosition, ChessColor otherColor)
+        {
+            if (Position.CheckIsValid(possiblePosition))
+            {
+                IFigure figureAtPosition = board.GetFigureAtPosition(possiblePosition);
+                if (CheckFigure(figureAtPosition, "Pawn", otherColor))
+                {
+                    return true;
                 }
             }
 
@@ -584,26 +399,7 @@
 
             if (figure.GetType().Name == "King")
             {
-                Position posTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
-                Position posTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
-                Position positionLeft = new Position(startingRow, (char)(startingCol - 1));
-                Position positionRight = new Position(startingRow, (char)(startingCol + 1));
-                Position posDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
-                Position posDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
-                Position positionTop = new Position(startingRow + 1, (char)(startingCol));
-                Position positionDown = new Position(startingRow - 1, (char)(startingCol));
-
-                List<Position> positionsAroundTheKing = new List<Position>()
-                {
-                    posTopLeft,
-                    posTopRight,
-                    positionLeft,
-                    positionRight,
-                    posDownLeft,
-                    posDownRight,
-                    positionTop,
-                    positionDown
-                };
+                List<Position> positionsAroundTheKing = GetPossibleKingPostions(startingRow, startingCol);
 
                 foreach (var position in positionsAroundTheKing)
                 {
@@ -1038,300 +834,44 @@
             }
             if (figure.GetType().Name == "Knight")
             {
-                Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
-                Position positionKnightTopRight = new Position(startingRow + 2, (char)(startingCol + 1));
-                Position positionKnightUpLeft = new Position(startingRow + 1, (char)(startingCol - 2));
-                Position positionKnightUpRight = new Position(startingRow + 1, (char)(startingCol + 2));
-                Position positionKnightDownLeft = new Position(startingRow - 2, (char)(startingCol - 1));
-                Position positionKnightDownRight = new Position(startingRow - 2, (char)(startingCol + 1));
-                Position positionKnightLeft = new Position(startingRow - 1, (char)(startingCol - 2));
-                Position positionKnightRight = new Position(startingRow - 1, (char)(startingCol + 2));
+                List<Position> possibleKnightPositions = GetPossibleKnightPositions(startingRow, startingCol);
 
-                if (Position.CheckIsValid(positionKnightTopLeft))
+                foreach (var currentKnightPosition in possibleKnightPositions)
                 {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightTopLeft);
-
-                    if (figureTopLeft == null)
+                    if (Position.CheckIsValid(currentKnightPosition))
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightTopLeft);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+                        IFigure figureAtPosition = board.GetFigureAtPosition(currentKnightPosition);
 
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                        if (figureAtPosition == null)
                         {
-                            available++;
+                            board.AddFigure(null, figurePosition);
+                            board.AddFigure(figure, currentKnightPosition);
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(figure, figurePosition);
+                            board.AddFigure(null, currentKnightPosition);
                         }
 
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightTopLeft);
-                    }
-
-                    if (figureTopLeft != null && figure.Color != figureTopLeft.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightTopLeft);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                        if (figureAtPosition != null && figure.Color != figureAtPosition.Color)
                         {
-                            available++;
+                            board.AddFigure(null, figurePosition);
+                            board.AddFigure(figure, currentKnightPosition);
+
+                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                            {
+                                available++;
+                            }
+
+                            board.AddFigure(figure, figurePosition);
+                            board.AddFigure(figureAtPosition, currentKnightPosition);
                         }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopLeft, positionKnightTopLeft);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightTopRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightTopRight);
-
-                    if (figureTopRight == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightTopRight);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightTopRight);
-                    }
-
-                    if (figureTopRight != null && figure.Color != figureTopRight.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightTopRight);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopRight, positionKnightTopRight);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightUpRight))
-                {
-                    IFigure figureTopRight = board.GetFigureAtPosition(positionKnightUpRight);
-
-                    if (figureTopRight == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightUpRight);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightUpRight);
-                    }
-
-                    if (figureTopRight != null && figure.Color != figureTopRight.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightUpRight);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopRight, positionKnightUpRight);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightUpLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightUpLeft);
-
-                    if (figureTopLeft == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightUpLeft);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightUpLeft);
-                    }
-
-                    if (figureTopLeft != null && figure.Color != figureTopLeft.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightUpLeft);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopLeft, positionKnightUpLeft);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightDownLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownLeft);
-
-                    if (figureTopLeft == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightDownLeft);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightDownLeft);
-                    }
-
-                    if (figureTopLeft != null && figure.Color != figureTopLeft.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightDownLeft);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopLeft, positionKnightDownLeft);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightDownRight))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightDownRight);
-
-                    if (figureTopLeft == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightDownRight);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightDownRight);
-                    }
-
-                    if (figureTopLeft != null && figure.Color != figureTopLeft.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightDownRight);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopLeft, positionKnightDownRight);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightLeft))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightLeft);
-
-                    if (figureTopLeft == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightLeft);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightLeft);
-                    }
-
-                    if (figureTopLeft != null && figure.Color != figureTopLeft.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightLeft);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopLeft, positionKnightLeft);
-                    }
-                }
-
-                if (Position.CheckIsValid(positionKnightRight))
-                {
-                    IFigure figureTopLeft = board.GetFigureAtPosition(positionKnightRight);
-
-                    if (figureTopLeft == null)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightRight);
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, positionKnightRight);
-                    }
-
-                    if (figureTopLeft != null && figure.Color != figureTopLeft.Color)
-                    {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, positionKnightRight);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(figureTopLeft, positionKnightRight);
                     }
                 }
             }
@@ -1344,46 +884,15 @@
                     Position positionTop = new Position(startingRow + 1, (char)(startingCol));
                     Position positionTwoTop = new Position(startingRow + 2, (char)(startingCol));
 
-                    if (Position.CheckIsValid(positionTopLeft))
+                    var diagonalMoves = new List<Position>()
                     {
-                        IFigure figureTopLeft = board.GetFigureAtPosition(positionTopLeft);
+                        positionTopLeft,
+                        positionTopRight
+                    };
 
-                        if (figureTopLeft != null)
-                        {
-                            board.AddFigure(figure, positionTopLeft);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(figureTopLeft, positionTopLeft);
-                            board.AddFigure(figure, figurePosition);
-                        }
-                    }
-
-                    if (Position.CheckIsValid(positionTopRight))
+                    foreach (var move in diagonalMoves)
                     {
-                        IFigure figureTopRight = board.GetFigureAtPosition(positionTopRight);
-
-                        if (figureTopRight != null)
-                        {
-                            board.AddFigure(figure, positionTopRight);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(figureTopRight, positionTopRight);
-                            board.AddFigure(figure, figurePosition);
-                        }
+                        available = CheckDiagonalMove(board, figurePosition, available, figure, move);
                     }
 
                     if (Position.CheckIsValid(positionTop))
@@ -1437,46 +946,15 @@
                     Position positionDown = new Position(startingRow - 1, (char)(startingCol));
                     Position positionTwoDown = new Position(startingRow - 2, (char)(startingCol));
 
-                    if (Position.CheckIsValid(positionDownLeft))
+                    var diagonalMoves = new List<Position>()
                     {
-                        IFigure figureDownLeft = board.GetFigureAtPosition(positionDownLeft);
+                        positionDownLeft,
+                        positionDownRight
+                    };
 
-                        if (figureDownLeft != null)
-                        {
-                            board.AddFigure(figure, positionDownLeft);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(figureDownLeft, positionDownLeft);
-                            board.AddFigure(figure, figurePosition);
-                        }
-                    }
-
-                    if (Position.CheckIsValid(positionDownRight))
+                    foreach (var move in diagonalMoves)
                     {
-                        IFigure figureDownRight = board.GetFigureAtPosition(positionDownRight);
-
-                        if (figureDownRight != null)
-                        {
-                            board.AddFigure(figure, positionDownRight);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(figureDownRight, positionDownRight);
-                            board.AddFigure(figure, figurePosition);
-                        }
+                        available = CheckDiagonalMove(board, figurePosition, available, figure, move);
                     }
 
                     if (Position.CheckIsValid(positionDown))
@@ -1525,6 +1003,84 @@
             }
 
             return available;
+        }
+
+        private static int CheckDiagonalMove(IBoard board, Position figurePosition, int available, IFigure figure, Position position)
+        {
+            if (Position.CheckIsValid(position))
+            {
+                IFigure figureAtPosition = board.GetFigureAtPosition(position);
+
+                if (figureAtPosition != null)
+                {
+                    board.AddFigure(figure, position);
+                    board.AddFigure(null, figurePosition);
+
+                    var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+                    if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+                    {
+                        available++;
+                    }
+
+                    board.AddFigure(figureAtPosition, position);
+                    board.AddFigure(figure, figurePosition);
+                }
+            }
+
+            return available;
+        }
+
+        private static List<Position> GetPossibleKingPostions(int startingRow, char startingCol)
+        {
+            Position posTopLeft = new Position(startingRow + 1, (char)(startingCol - 1));
+            Position posTopRight = new Position(startingRow + 1, (char)(startingCol + 1));
+            Position positionLeft = new Position(startingRow, (char)(startingCol - 1));
+            Position positionRight = new Position(startingRow, (char)(startingCol + 1));
+            Position posDownLeft = new Position(startingRow - 1, (char)(startingCol - 1));
+            Position posDownRight = new Position(startingRow - 1, (char)(startingCol + 1));
+            Position positionTop = new Position(startingRow + 1, (char)(startingCol));
+            Position positionDown = new Position(startingRow - 1, (char)(startingCol));
+
+            List<Position> positionsAroundTheKing = new List<Position>()
+                {
+                    posTopLeft,
+                    posTopRight,
+                    positionLeft,
+                    positionRight,
+                    posDownLeft,
+                    posDownRight,
+                    positionTop,
+                    positionDown
+                };
+
+            return positionsAroundTheKing;
+        }
+
+        private static List<Position> GetPossibleKnightPositions(int startingRow, char startingCol)
+        {
+            Position positionKnightTopLeft = new Position(startingRow + 2, (char)(startingCol - 1));
+            Position positionKnightTopRight = new Position(startingRow + 2, (char)(startingCol + 1));
+            Position positionKnightUpLeft = new Position(startingRow + 1, (char)(startingCol - 2));
+            Position positionKnightUpRight = new Position(startingRow + 1, (char)(startingCol + 2));
+            Position positionKnightDownLeft = new Position(startingRow - 2, (char)(startingCol - 1));
+            Position positionKnightDownRight = new Position(startingRow - 2, (char)(startingCol + 1));
+            Position positionKnightLeft = new Position(startingRow - 1, (char)(startingCol - 2));
+            Position positionKnightRight = new Position(startingRow - 1, (char)(startingCol + 2));
+
+            List<Position> possibleKnightPositions = new List<Position>()
+                {
+                    positionKnightTopLeft,
+                    positionKnightTopRight,
+                    positionKnightUpLeft,
+                    positionKnightUpRight,
+                    positionKnightDownLeft,
+                    positionKnightDownRight,
+                    positionKnightLeft,
+                    positionKnightRight
+                };
+
+            return possibleKnightPositions;
         }
 
         public MovedFigures()
