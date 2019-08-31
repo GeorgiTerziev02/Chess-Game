@@ -9,13 +9,6 @@
 
     public class MovedFigures
     {
-        private readonly static Position WhiteKingPosition = Position.FromChessCoordinates(1, 'e');
-        private readonly static Position BlackKingPosition = Position.FromChessCoordinates(8, 'e');
-        private readonly static Position WhiteRightRookPosition = Position.FromChessCoordinates(1, 'h');
-        private readonly static Position WhiteLeftRookPosition = Position.FromChessCoordinates(1, 'a');
-        private readonly static Position BlackRightRookPosition = Position.FromChessCoordinates(8, 'h');
-        private readonly static Position BlackLeftRookPosition = Position.FromChessCoordinates(8, 'a');
-
         private int[] whiteSideThirdRow;
         private int[] blackSideThirdRow;
 
@@ -768,6 +761,7 @@
             board.AddFigure(figure, currentPosition);
 
             var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
             if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
             {
                 available++;
@@ -791,6 +785,7 @@
                     board.AddFigure(null, figurePosition);
 
                     var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
                     if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
                     {
                         available++;
@@ -883,34 +878,34 @@
 
         public void CheckMovedFigures(IBoard board)
         {
-            IFigure whiteKingShouldbeAt = board.GetFigureAtPosition(WhiteKingPosition);
-            IFigure blackKingShouldbeAt = board.GetFigureAtPosition(BlackKingPosition);
-            IFigure whiteRightRookShouldbeAt = board.GetFigureAtPosition(WhiteRightRookPosition);
-            IFigure whiteLeftRookShouldbeAt = board.GetFigureAtPosition(WhiteLeftRookPosition);
-            IFigure blackRightRookShouldbeAt = board.GetFigureAtPosition(BlackRightRookPosition);
-            IFigure blackLeftRookShouldbeAt = board.GetFigureAtPosition(BlackLeftRookPosition);
+            IFigure whiteKingShouldbeAt = board.GetFigureAtPosition(GlobalConstants.StandardGameWhiteKingPosition);
+            IFigure blackKingShouldbeAt = board.GetFigureAtPosition(GlobalConstants.StandardGameBlackKingPosition);
+            IFigure whiteRightRookShouldbeAt = board.GetFigureAtPosition(GlobalConstants.StandardGameWhiteRightRookPosition);
+            IFigure whiteLeftRookShouldbeAt = board.GetFigureAtPosition(GlobalConstants.StandardGameWhiteLeftRookPosition);
+            IFigure blackRightRookShouldbeAt = board.GetFigureAtPosition(GlobalConstants.StandardGameBlackRightRookPosition);
+            IFigure blackLeftRookShouldbeAt = board.GetFigureAtPosition(GlobalConstants.StandardGameBlackLeftRookPosition);
 
-            if (whiteKingShouldbeAt == null || board.GetFigureAtPosition(WhiteKingPosition).GetType().Name != "King")
+            if (whiteKingShouldbeAt == null || board.GetFigureAtPosition(GlobalConstants.StandardGameWhiteKingPosition).GetType().Name != "King")
             {
                 IsWhiteKingMoved = true;
             }
-            if (blackKingShouldbeAt == null || board.GetFigureAtPosition(BlackKingPosition).GetType().Name != "King")
+            if (blackKingShouldbeAt == null || board.GetFigureAtPosition(GlobalConstants.StandardGameBlackKingPosition).GetType().Name != "King")
             {
                 IsBlackKingMoved = true;
             }
-            if (whiteRightRookShouldbeAt == null || board.GetFigureAtPosition(WhiteRightRookPosition).GetType().Name != "Rook")
+            if (whiteRightRookShouldbeAt == null || board.GetFigureAtPosition(GlobalConstants.StandardGameWhiteRightRookPosition).GetType().Name != "Rook")
             {
                 IsWhiteRightRookMoved = true;
             }
-            if (whiteLeftRookShouldbeAt == null || board.GetFigureAtPosition(WhiteLeftRookPosition).GetType().Name != "Rook")
+            if (whiteLeftRookShouldbeAt == null || board.GetFigureAtPosition(GlobalConstants.StandardGameWhiteLeftRookPosition).GetType().Name != "Rook")
             {
                 IsWhiteLeftRookMoved = true;
             }
-            if (blackLeftRookShouldbeAt == null || board.GetFigureAtPosition(BlackLeftRookPosition).GetType().Name != "Rook")
+            if (blackLeftRookShouldbeAt == null || board.GetFigureAtPosition(GlobalConstants.StandardGameBlackLeftRookPosition).GetType().Name != "Rook")
             {
                 IsBlackLeftRookMoved = true;
             }
-            if (blackRightRookShouldbeAt == null || board.GetFigureAtPosition(BlackRightRookPosition).GetType().Name != "Rook")
+            if (blackRightRookShouldbeAt == null || board.GetFigureAtPosition(GlobalConstants.StandardGameBlackRightRookPosition).GetType().Name != "Rook")
             {
                 IsBlackRightRookMoved = true;
             }
