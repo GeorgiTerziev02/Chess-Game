@@ -184,6 +184,7 @@
             return false;
         }
 
+        //TODO: add available movement = 0;
         private bool Path(IBoard board, IPlayer player, bool check)
         {
             Position playerKing = board.GetFigurePostionByTypeAndColor("King", player.Color);

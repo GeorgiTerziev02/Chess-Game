@@ -441,33 +441,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -495,33 +474,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -549,33 +507,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -603,33 +540,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -654,33 +570,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -703,33 +598,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -752,33 +626,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -801,33 +654,12 @@
 
                     if (currentFigure == null)
                     {
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(null, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, null);
                     }
 
                     if (currentFigure != null && figure.Color != currentFigure.Color)
                     {
-                        board.AddFigure(null, figurePosition);
-                        board.AddFigure(figure, currentPosition);
-
-                        var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                        if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                        {
-                            available++;
-                        }
-                        board.AddFigure(figure, figurePosition);
-                        board.AddFigure(currentFigure, currentPosition);
+                        available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentPosition, currentFigure);
                         break;
                     }
                 }
@@ -844,33 +676,12 @@
 
                         if (figureAtPosition == null)
                         {
-                            board.AddFigure(null, figurePosition);
-                            board.AddFigure(figure, currentKnightPosition);
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(figure, figurePosition);
-                            board.AddFigure(null, currentKnightPosition);
+                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentKnightPosition, null);
                         }
 
                         if (figureAtPosition != null && figure.Color != figureAtPosition.Color)
                         {
-                            board.AddFigure(null, figurePosition);
-                            board.AddFigure(figure, currentKnightPosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(figure, figurePosition);
-                            board.AddFigure(figureAtPosition, currentKnightPosition);
+                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, currentKnightPosition, figureAtPosition);
                         }
                     }
                 }
@@ -901,18 +712,7 @@
 
                         if (figureTop == null)
                         {
-                            board.AddFigure(figure, positionTop);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(null, positionTop);
-                            board.AddFigure(figure, figurePosition);
+                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTop, null);
                         }
                     }
 
@@ -923,18 +723,7 @@
 
                         if (figureTwoTop == null && figureTop == null)
                         {
-                            board.AddFigure(figure, positionTwoTop);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(null, positionTwoTop);
-                            board.AddFigure(figure, figurePosition);
+                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTwoTop, null);
                         }
                     }
                 }
@@ -963,18 +752,7 @@
 
                         if (figureDown == null)
                         {
-                            board.AddFigure(figure, positionDown);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(null, positionDown);
-                            board.AddFigure(figure, figurePosition);
+                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionDown, null);
                         }
                     }
 
@@ -985,22 +763,28 @@
 
                         if (figureTwoDown == null && figureDown == null)
                         {
-                            board.AddFigure(figure, positionTwoDown);
-                            board.AddFigure(null, figurePosition);
-
-                            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
-                            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
-                            {
-                                available++;
-                            }
-
-                            board.AddFigure(null, positionTwoDown);
-                            board.AddFigure(figure, figurePosition);
+                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTwoDown, null);
                         }
                     }
                 }
             }
+
+            return available;
+        }
+
+        private static int CheckIfMoveIsAvailable(IBoard board, int available, Position figurePosition,IFigure figure, Position currentPosition, IFigure currentFigure)
+        {
+            board.AddFigure(null, figurePosition);
+            board.AddFigure(figure, currentPosition);
+
+            var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
+
+            if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
+            {
+                available++;
+            }
+            board.AddFigure(figure, figurePosition);
+            board.AddFigure(currentFigure, currentPosition);
 
             return available;
         }
