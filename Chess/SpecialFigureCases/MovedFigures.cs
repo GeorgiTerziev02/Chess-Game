@@ -9,13 +9,6 @@
 
     public class MovedFigures
     {
-        private bool isWhiteKingMoved;
-        private bool isBlackKingMoved;
-        private bool isBlackRightRookMoved;
-        private bool isWhiteRightRookMoved;
-        private bool isBlackLeftRookMoved;
-        private bool isWhiteLeftRookMoved;
-
         private readonly static Position WhiteKingPosition = Position.FromChessCoordinates(1, 'e');
         private readonly static Position BlackKingPosition = Position.FromChessCoordinates(8, 'e');
         private readonly static Position WhiteRightRookPosition = Position.FromChessCoordinates(1, 'h');
@@ -23,8 +16,6 @@
         private readonly static Position BlackRightRookPosition = Position.FromChessCoordinates(8, 'h');
         private readonly static Position BlackLeftRookPosition = Position.FromChessCoordinates(8, 'a');
 
-
-        //keeping the round
         private int[] whiteSideThirdRow;
         private int[] blackSideThirdRow;
 
@@ -313,7 +304,7 @@
                 }
             }
 
-            for (int i = startingCol - 1; i >= 'a'; i--)
+            for (int i = startingCol - 1; i >= GlobalConstants.MinimumColumnValueOnBoard; i--)
             {
                 Position currentPosition = new Position(startingRow, (char)i);
 
@@ -342,7 +333,6 @@
                 }
             }
 
-            //check for king
             List<Position> positionsAroundTheKing = GetPossibleKingPostions(startingRow, startingCol);
 
             foreach (var currentPosition in positionsAroundTheKing)
@@ -636,7 +626,7 @@
                     }
                 }
 
-                for (int i = startingCol - 1; i >= 'a'; i--)
+                for (int i = startingCol - 1; i >= GlobalConstants.MinimumColumnValueOnBoard; i--)
                 {
                     Position currentPosition = new Position(startingRow, (char)i);
 
@@ -772,17 +762,17 @@
             return available;
         }
 
-        private static int CheckIfMoveIsAvailable(IBoard board, int available, Position figurePosition,IFigure figure, Position currentPosition, IFigure currentFigure)
+        private static int CheckIfMoveIsAvailable(IBoard board, int available, Position figurePosition, IFigure figure, Position currentPosition, IFigure currentFigure)
         {
             board.AddFigure(null, figurePosition);
             board.AddFigure(figure, currentPosition);
 
             var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
             if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
             {
                 available++;
             }
+
             board.AddFigure(figure, figurePosition);
             board.AddFigure(currentFigure, currentPosition);
 
@@ -801,7 +791,6 @@
                     board.AddFigure(null, figurePosition);
 
                     var kingPosition = board.GetFigurePostionByTypeAndColor("King", figure.Color);
-
                     if (IsFieldAttacked(board, kingPosition, figure.Color) == false)
                     {
                         available++;
@@ -880,17 +869,17 @@
             blackSideThirdRow = new int[8];
         }
 
-        public bool IsWhiteKingMoved { get => isWhiteKingMoved; set => isWhiteKingMoved = value; }
+        public bool IsWhiteKingMoved { get; set; }
 
-        public bool IsBlackKingMoved { get => isBlackKingMoved; set => isBlackKingMoved = value; }
+        public bool IsBlackKingMoved { get; set; }
 
-        public bool IsBlackRightRookMoved { get => isBlackRightRookMoved; set => isBlackRightRookMoved = value; }
+        public bool IsBlackRightRookMoved { get; set; }
 
-        public bool IsWhiteRightRookMoved { get => isWhiteRightRookMoved; set => isWhiteRightRookMoved = value; }
+        public bool IsWhiteRightRookMoved { get; set; }
 
-        public bool IsBlackLeftRookMoved { get => isBlackLeftRookMoved; set => isBlackLeftRookMoved = value; }
+        public bool IsBlackLeftRookMoved { get; set; }
 
-        public bool IsWhiteLeftRookMoved { get => isWhiteLeftRookMoved; set => isWhiteLeftRookMoved = value; }
+        public bool IsWhiteLeftRookMoved { get; set; }
 
         public void CheckMovedFigures(IBoard board)
         {
@@ -1008,10 +997,8 @@
             {
                 return ChessColor.White;
             }
-            else
-            {
-                return ChessColor.Black;
-            }
+
+            return ChessColor.Black;
         }
     }
 }

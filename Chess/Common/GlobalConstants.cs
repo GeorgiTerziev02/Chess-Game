@@ -18,5 +18,8 @@
         public const int BlackPawnStartingRow = 7;
 
         public const string OutputEndGame = "Game ended with ";
+        public const string OutputDraw = "Draw! Due to impossility of checkmate!";
+        public const string OutputPath = "Path! Because you have no valid moves!";
+        public const string OutputWin = "{0} winning!";
     }
 }

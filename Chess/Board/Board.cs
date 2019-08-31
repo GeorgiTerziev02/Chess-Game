@@ -26,7 +26,7 @@
 
         public void AddFigure(IFigure figure, Position position)
         {
-            //TODO: Remove comment and create new method if needed
+            //Remove comment and create new method if needed
             //ObjectValidator.CheckIfObjectIsNull(figure, ExceptionMessages.NullFigureException);
 
             this.CheckIfPositionIsValid(position);
@@ -146,6 +146,5 @@
         {
             Position.CheckIfValid(position);
         }
-
     }
 }

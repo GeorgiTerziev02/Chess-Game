@@ -73,7 +73,7 @@
                     {
                         if (CheckCheckmate(board, player))
                         {
-                            renderer.PrintEndGame($"{otherPlayerColor} winning!");
+                            renderer.PrintEndGame(string.Format(GlobalConstants.OutputWin, otherPlayerColor));
                             Environment.Exit(0);
                         }
 
@@ -82,13 +82,13 @@
 
                     else if (CheckDraw())
                     {
-                        renderer.PrintEndGame("Draw! Due to impossility of checkmate!");
+                        renderer.PrintEndGame(GlobalConstants.OutputDraw);
                         Environment.Exit(0);
                     }
 
                     else if (Path(board, player, check))
                     {
-                        renderer.PrintEndGame("Path!");
+                        renderer.PrintEndGame(GlobalConstants.OutputPath);
                         Environment.Exit(0);
                     }
 
