@@ -7,14 +7,7 @@
     using Chess.Figures.Contracts;
 
     public class KingCases
-    {
-        //TODO: constants
-        private readonly static Position WhiteKingPosition = Position.FromChessCoordinates(1, 'e');
-        private readonly static Position BlackKingPosition = Position.FromChessCoordinates(8, 'e');
-        private readonly static Position WhiteRightRookPosition = Position.FromChessCoordinates(1, 'h');
-        private readonly static Position WhiteLeftRookPosition = Position.FromChessCoordinates(1, 'a');
-        private readonly static Position BlackRightRookPosition = Position.FromChessCoordinates(8, 'h');
-        private readonly static Position BlackLeftRookPosition = Position.FromChessCoordinates(8, 'a');
+    { 
         private readonly static Position WhiteShortCastlingPosition = Position.FromChessCoordinates(1, 'g');
         private readonly static Position WhiteLongCastlingPosition = Position.FromChessCoordinates(1, 'c');
         private readonly static Position BlackShortCastlingPosition = Position.FromChessCoordinates(8, 'g');
@@ -28,16 +21,17 @@
 
             if (color == ChessColor.White)
             {
-                if (to.Row == WhiteShortCastlingPosition.Row && to.Col == WhiteShortCastlingPosition.Col && from.Col == WhiteKingPosition.Col && from.Row == WhiteKingPosition.Row)
+                if (to.Row == WhiteShortCastlingPosition.Row && to.Col == WhiteShortCastlingPosition.Col
+                    && from.Col == GlobalConstants.StandardGameWhiteKingPosition.Col && from.Row == GlobalConstants.StandardGameWhiteKingPosition.Row)
                 {
                     if (!MoveFiguresInformation.isWhiteKingMoved && !MoveFiguresInformation.isWhiteRightRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
                         CheckIfKingIsInCheck(board, color);
-                        CheckIfKingCrossesAttackedField(board, WhiteKingPosition, WhiteShortCastlingPosition, color);
+                        CheckIfKingCrossesAttackedField(board, GlobalConstants.StandardGameWhiteKingPosition, WhiteShortCastlingPosition, color);
 
-                        board.RemoveFigure(WhiteKingPosition);
-                        board.RemoveFigure(WhiteRightRookPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameWhiteKingPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameWhiteRightRookPosition);
 
                         board.AddFigure(new King(color), WhiteShortCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(1, 'f'));
@@ -50,16 +44,17 @@
                     }
                 }
 
-                if (to.Row == WhiteLongCastlingPosition.Row && to.Col == WhiteLongCastlingPosition.Col && from.Col == WhiteKingPosition.Col && from.Row == WhiteKingPosition.Row)
+                if (to.Row == WhiteLongCastlingPosition.Row && to.Col == WhiteLongCastlingPosition.Col 
+                    && from.Col == GlobalConstants.StandardGameWhiteKingPosition.Col && from.Row == GlobalConstants.StandardGameWhiteKingPosition.Row)
                 {
                     if (!MoveFiguresInformation.isWhiteKingMoved && !MoveFiguresInformation.isWhiteLeftRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
                         CheckIfKingIsInCheck(board, color);
-                        CheckIfKingCrossesAttackedField(board, WhiteKingPosition, WhiteLongCastlingPosition, color);
+                        CheckIfKingCrossesAttackedField(board, GlobalConstants.StandardGameWhiteKingPosition, WhiteLongCastlingPosition, color);
 
-                        board.RemoveFigure(WhiteKingPosition);
-                        board.RemoveFigure(WhiteLeftRookPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameWhiteKingPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameWhiteLeftRookPosition);
 
                         board.AddFigure(new King(color), WhiteLongCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(1, 'd'));
@@ -75,16 +70,17 @@
 
             if (color == ChessColor.Black)
             {
-                if (to.Row == BlackShortCastlingPosition.Row && to.Col == BlackShortCastlingPosition.Col && from.Col == BlackKingPosition.Col && from.Row == BlackKingPosition.Row)
+                if (to.Row == BlackShortCastlingPosition.Row && to.Col == BlackShortCastlingPosition.Col 
+                    && from.Col == GlobalConstants.StandardGameBlackKingPosition.Col && from.Row == GlobalConstants.StandardGameBlackKingPosition.Row)
                 {
-                    if (!MoveFiguresInformation.isBlackKingMoved && !MoveFiguresInformation.isBlackRightRookMoved && from.Col == BlackKingPosition.Col && from.Row == BlackKingPosition.Row)
+                    if (!MoveFiguresInformation.isBlackKingMoved && !MoveFiguresInformation.isBlackRightRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
                         CheckIfKingIsInCheck(board, color);
-                        CheckIfKingCrossesAttackedField(board, BlackKingPosition, BlackShortCastlingPosition, color);
+                        CheckIfKingCrossesAttackedField(board, GlobalConstants.StandardGameBlackKingPosition, BlackShortCastlingPosition, color);
 
-                        board.RemoveFigure(BlackKingPosition);
-                        board.RemoveFigure(BlackRightRookPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameBlackKingPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameBlackRightRookPosition);
 
                         board.AddFigure(new King(color), BlackShortCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(8, 'f'));
@@ -97,16 +93,17 @@
                     }
                 }
 
-                if (to.Row == BlackLongCastlingPosition.Row && to.Col == BlackLongCastlingPosition.Col && from.Col == BlackKingPosition.Col && from.Row == BlackKingPosition.Row)
+                if (to.Row == BlackLongCastlingPosition.Row && to.Col == BlackLongCastlingPosition.Col 
+                    && from.Col == GlobalConstants.StandardGameBlackKingPosition.Col && from.Row == GlobalConstants.StandardGameBlackKingPosition.Row)
                 {
                     if (!MoveFiguresInformation.isBlackKingMoved && !MoveFiguresInformation.isBlackLeftRookMoved)
                     {
                         CheckForFiguresBetweenPositions(board, figure, from, to);
                         CheckIfKingIsInCheck(board, color);
-                        CheckIfKingCrossesAttackedField(board, BlackKingPosition, BlackLongCastlingPosition, color);
+                        CheckIfKingCrossesAttackedField(board, GlobalConstants.StandardGameBlackKingPosition, BlackLongCastlingPosition, color);
 
-                        board.RemoveFigure(BlackKingPosition);
-                        board.RemoveFigure(BlackLeftRookPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameBlackKingPosition);
+                        board.RemoveFigure(GlobalConstants.StandardGameBlackLeftRookPosition);
 
                         board.AddFigure(new King(color), BlackLongCastlingPosition);
                         board.AddFigure(new Rook(color), Position.FromChessCoordinates(8, 'd'));

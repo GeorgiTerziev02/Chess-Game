@@ -371,7 +371,6 @@
             return availableMoves;
         }
 
-        //TODO: refactor
         private static int GetFigureAvailableMoves(IBoard board, Position figurePosition)
         {
             int available = 0;
