@@ -694,7 +694,7 @@
 
                         if (figureTop == null)
                         {
-                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTop, null);
+                            available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTop, null);
                         }
                     }
 
@@ -705,7 +705,7 @@
 
                         if (figureTwoTop == null && figureTop == null)
                         {
-                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTwoTop, null);
+                            available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTwoTop, null);
                         }
                     }
                 }
@@ -734,7 +734,7 @@
 
                         if (figureDown == null)
                         {
-                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionDown, null);
+                            available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionDown, null);
                         }
                     }
 
@@ -745,7 +745,7 @@
 
                         if (figureTwoDown == null && figureDown == null)
                         {
-                            CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTwoDown, null);
+                            available = CheckIfMoveIsAvailable(board, available, figurePosition, figure, positionTwoDown, null);
                         }
                     }
                 }

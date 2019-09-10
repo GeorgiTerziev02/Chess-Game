@@ -184,45 +184,16 @@
             return false;
         }
 
-        //TODO: add available movement = 0;
         private bool Path(IBoard board, IPlayer player, bool check)
         {
-            Position playerKing = board.GetFigurePostionByTypeAndColor("King", player.Color);
-            Position leftFromKing = new Position(playerKing.Row, (char)(playerKing.Col - 1));
-            Position rightFromKing = new Position(playerKing.Row, (char)(playerKing.Col + 1));
-            Position downFromKing = new Position(playerKing.Row - 1, playerKing.Col);
-            Position upFromKing = new Position(playerKing.Row + 1, playerKing.Col);
-            Position leftUpFromKing = new Position(playerKing.Row + 1, (char)(playerKing.Col - 1));
-            Position leftDownFromKing = new Position(playerKing.Row - 1, (char)(playerKing.Col - 1));
-            Position rightUpFromKing = new Position(playerKing.Row + 1, (char)(playerKing.Col + 1));
-            Position rightDownFromKing = new Position(playerKing.Row - 1, (char)(playerKing.Col + 1));
+            int availableMoves = MovedFigures.GetAvailableMoves(board, player);
 
-            List<Position> aroundTheKingPosition = new List<Position>()
+            if (check == false && availableMoves == 0)
             {
-                leftFromKing,
-                leftDownFromKing,
-                leftUpFromKing,
-                downFromKing,
-                upFromKing,
-                rightFromKing,
-                rightDownFromKing,
-                rightUpFromKing
-            };
-
-            var validPositions = aroundTheKingPosition.Where(p => Position.CheckIsValid(p)).ToList();
-
-            if (check == false)
-            {
-                foreach (var position in validPositions)
-                {
-                    if (!MovedFigures.IsFieldAttacked(board, position, player.Color))
-                    {
-                        return false;
-                    }
-                }
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         private IPlayer GetNextPlayer()
